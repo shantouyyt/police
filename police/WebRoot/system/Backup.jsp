@@ -10,7 +10,7 @@
 <html>
 <head>
 <%@ include file="../common/head.jsp"%>
-<title>备份管理</title>
+<title>备份-管理</title>
 
 </head>
 
