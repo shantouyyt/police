@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Model.Result;
+import Utils.BackupMysql;
 
 import com.google.gson.Gson;
 
@@ -78,8 +79,16 @@ public class BackupServlet extends HttpServlet {
 
 		String act = request.getParameter("act");
 		if ("backup".equals(act)) {
-			
+			oret = BackupMysql.backup();
+		}else if ("backup".equals(act)) {
+			oret = BackupMysql.load();
 		}
+		
+		String json = gson.toJson(oret);
+		out.print(json);
+
+		out.flush();
+		out.close();
 	}
 
 	/**

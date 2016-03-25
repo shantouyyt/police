@@ -9,9 +9,10 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 import DBManager.BackupConfig;
+import Model.Result;
 
 public class BackupMysql {
-	public static void backup() {
+	public static Result backup() {
 		try {
 			Runtime rt = Runtime.getRuntime();
 			// 调用 调用mysql的安装目录的命令
@@ -45,13 +46,14 @@ public class BackupMysql {
 			br.close();
 			writer.close();
 			fout.close();
-			System.out.println("");
+			return Result.Success("备份成功");
 		} catch (Exception e) {
 			e.printStackTrace();
+			return Result.Fail("备份失败");
 		}
 	}
 
-	public static void load() {
+	public static Result load() {
 		try {
 			String fPath = BackupConfig.BACKFILE;
 			Runtime rt = Runtime.getRuntime();
@@ -81,10 +83,11 @@ public class BackupMysql {
 			br.close();
 			writer.close();
 
-			System.out.println("");
+			return Result.Success("还原成功");
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return Result.Success("还原失败");
 		}
 
 	}
