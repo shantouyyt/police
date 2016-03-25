@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a _href="article-list.html" data-title="管理员管理" href="javascript:void(0)">管理员管理</a></li>
                 </dl>
                 <dl id="Dl14">
-                    <li><a _href="article-list.html" data-title="商家管理" href="javascript:void(0)">商家管理</a></li>
+                    <li><a _href="article-list.html" data-title="商家管理" href="javascript:void(0)">备份还原管理</a></li>
                 </dl>
                 <dl id="Dl15">
                     <li><a _href="article-list.html" data-title="商品管理" href="javascript:void(0)">商品管理</a></li>

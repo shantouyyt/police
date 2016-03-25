@@ -80,7 +80,7 @@ public class BackupServlet extends HttpServlet {
 		String act = request.getParameter("act");
 		if ("backup".equals(act)) {
 			oret = BackupMysql.backup();
-		}else if ("backup".equals(act)) {
+		}else if ("load".equals(act)) {
 			oret = BackupMysql.load();
 		}
 		
