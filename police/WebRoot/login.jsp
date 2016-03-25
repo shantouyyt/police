@@ -64,7 +64,7 @@
 						<select class="select" id="userType" name="userType" style="margin-top: 10px;width: 120px;height: 30;">
 							<option value="1">警员</option>
 							<option value="2">领导</option>
-							<option value="3">zjxxxvvv管理员</option>
+							<option value="3">管理员</option>
 						</select>
 					</div>
 				</div>
