@@ -25,24 +25,27 @@
 
 		<form id="searchform">
 			<div class="text-c">
-				日期范围：
-                <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}',dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="datemin" name="createDate" class="input-text Wdate" style="width: 170px;">
-                    -
-                <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="datemax" name="endDate" class="input-text Wdate" style="width: 170px;">
-                
+				<input type="text" class="input-text" style="width: 250px"
+					placeholder="事故编号" id="id" name="id">
 					
+				日期范围： <input type="text"
+					onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}',dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+					id="datemin" name="createDate" class="input-text Wdate"
+					style="width: 170px;"> - <input type="text"
+					onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+					id="datemax" name="endDate" class="input-text Wdate"
+					style="width: 170px;"> <input type="text"
+					class="input-text" style="width: 250px" placeholder="路段"
+					id="accidentSite" name="accidentSite">
+
 				<button onclick="search();" type="button"
 					class="btn btn-success radius" id="Button1" name="">
 					<i class="Hui-iconfont">&#xe665;</i> 搜索
 				</button>
 			</div>
 		</form>
-		
-		<div class="cl pd-5 bg-1 bk-gray mt-20">
-            <span class="l">
-                <a class="btn btn-primary radius" data-title="填写事故登记表" _href="AccidentAdd.jsp" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 填写事故登记表</a>
-            </span>
-        </div>
+
+
 
 
 		<div class="mt-20">
@@ -55,7 +58,7 @@
 						<th width="8%">姓名</th>
 						<th width="5%">性别</th>
 						<th width="10%">手机号码</th>
-						
+
 						<th width="10%">交通方式</th>
 						<th width="20%">事故地点</th>
 						<th width="15%">事故日期</th>
@@ -76,8 +79,7 @@
 <script type="text/javascript">
 	var table;
 	$(function() {
-		table = $('#datatable')
-				.dataTable(
+		table = $('#datatable').dataTable(
 						{
 							"iDisplayLength" : 5, //每页显示10条数据
 							"bFilter" : false,
@@ -118,10 +120,11 @@
 									},
 									{
 										"mData" : "status",
-										"render" : function(data, type, full,meta) {
+										"render" : function(data, type, full,
+												meta) {
 											if (data == "-1") {
 												return "未通过";
-											}else if(data == "0"){
+											} else if (data == "0") {
 												return "未审批";
 											}
 											return "通过";
@@ -129,16 +132,19 @@
 									},
 									{
 										"mData" : "",
-										"render" : function(data, type, full,meta) {
+										"render" : function(data, type, full,
+												meta) {
 											var html = "";
-											html = 	 '<a data-title="查看事故登记表" _href="AccidentInfo.jsp?id='
-											html +=  	full.id
-											html +=  '" onclick="Hui_admin_tab(this)" href="javascript:;">查看</a>';
-											if(full.status=="0"){
+											html = '<a data-title="查看事故登记表" _href="AccidentInfo.jsp?id='
+											html += full.id
+											html += '" onclick="Hui_admin_tab(this)" href="javascript:;">查看</a>';
+											if (full.status == "0") {
 												//未审批
-												html += '&nbsp;&nbsp;<a data-title="修改事故登记表" _href="AccidentAdd.jsp?id='+ full.id + '" onclick="Hui_admin_tab(this)" href="javascript:;" >修改</a>';
+												html += '&nbsp;&nbsp;<a data-title="修改事故登记表" _href="AccidentAdd.jsp?id='
+														+ full.id
+														+ '" onclick="Hui_admin_tab(this)" href="javascript:;" >修改</a>';
 											}
-													
+
 											return html;
 										}
 									} ],
@@ -158,9 +164,12 @@
 
 	function fnServerData(sSource, aoData, fnCallback) {
 
-		var data = {};
+		var data  = $("#searchform").serializeObject();
+		if(data.id==""){
+			data.id = 0;
+		}
 		data["act"] = "list";
-		data["data"] = $.toJSON($("#searchform").serializeObject());
+		data["data"] = $.toJSON(data);
 		data["aoData"] = $.toJSON(aoData);
 		$.ajax({
 			url : sSource,
@@ -180,7 +189,6 @@
 	function search() {
 		table.fnDraw();
 	}
-
 
 	function aupdate() {
 		//table.fnDraw();

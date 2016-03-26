@@ -47,6 +47,10 @@ public class AccidentDal {
 		String sql = "select * from Accident where 1=1 ";
 
 		StringBuilder sb = new StringBuilder();
+		if (info.getId() > 0) {
+			sb.append(" and ID =").append(info.getId()).append("");
+		}
+		
 		if (info.getUserID() > 0) {
 			sb.append(" and UserID =").append(info.getUserID()).append("");
 		}
