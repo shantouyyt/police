@@ -25,14 +25,15 @@
 
 		<form id="searchform">
 			<div class="text-c">
-				<input type="text" class="input-text" style="width: 250px"
-					placeholder="姓名" id="un" name="name"> 
-				<input type="text"
-					class="input-text" style="width: 250px" placeholder="驾驶证" id="license"
-					name="license">
+				日期范围：
+                <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}',dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="datemin" name="createDate" class="input-text Wdate" style="width: 170px;">
+                    -
+                <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="datemax" name="endDate" class="input-text Wdate" style="width: 170px;">
+                
+					
 				<button onclick="search();" type="button"
 					class="btn btn-success radius" id="Button1" name="">
-					<i class="Hui-iconfont">&#xe665;</i> 搜用户
+					<i class="Hui-iconfont">&#xe665;</i> 搜索
 				</button>
 			</div>
 		</form>
@@ -127,7 +128,7 @@
 										"render" : function(data, type, full,
 												meta) {
 											var html = "";
-											html = '<a data-title="修改驾驶员" _href="DriverAdd.jsp?id='
+											html = '<a data-title="查看事故登记表" _href="AccidentAdd.jsp?id='
 													+ full.id
 													+ '" onclick="Hui_admin_tab(this)" href="javascript:;" ">查看</a>';
 													

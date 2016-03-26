@@ -70,7 +70,7 @@
 				</div>
 				<div class="col-4"></div>
 			</div>
-			
+			<input type="hidden" id="id" name="id" />
 			<div class="row cl">
 				<div class="col-10 col-offset-2">
 					<button onclick="btn_Opt();" class="btn btn-primary radius"
@@ -89,10 +89,45 @@
 
 <%@ include file="../common/script.jsp"%>
 <script>
-
+var id = getUrlVar("id");
+	if (id > 0) {
+		$("#id").val(id);
+	} else {
+		$("#id").val(0);
+	}
+	$(function() {
+		if (id > 0) {
+			var data = {};
+			data["act"] = "get";
+			data["data"] = id;
+			$
+					.ajax({
+						url : '${pageContext.request.contextPath}/servlet/AccidentServlet',
+						data : data,
+						type : 'post',
+						cache : false,
+						dataType : 'json',
+						success : function(r) {
+							if (r.statusID > 0) {
+								Json2Form(JSON.parse(r.message));
+							} else {
+								alert(r.message);
+							}
+						},
+						error : function() {
+							alert("操作失败");
+						}
+					});
+		}
+	});
+	
 	function btn_Opt() {
 		var data = {};
-		data["act"] = "add";
+		if (id > 0) {
+			data["act"] = "update";
+		} else {
+			data["act"] = "add";
+		}
 		data["data"] = $.toJSON($("#form").serializeObject());
 		$.ajax({
 			url : '${pageContext.request.contextPath}/servlet/AccidentServlet',

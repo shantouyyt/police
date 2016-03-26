@@ -36,6 +36,30 @@ public class AccidentService {
 		}
 		return Result.Success("添加成功");
 	}
+	
+	public Result Update(AccidentInfo info) {
+		if (StringHelper.IsStrNull(info.getName())) {
+			return Result.Fail("姓名不能为空");
+		}
+		if (StringHelper.IsStrNull(info.getTel())) {
+			return Result.Fail("电话不能为空");
+		}
+		if (StringHelper.IsStrNull(info.getAccidentSite())) {
+			return Result.Fail("地点不能为空");
+		}
+		if (StringHelper.IsStrNull(info.getTrafficMode())) {
+			return Result.Fail("交通方式不能为空");
+		}
+		if (StringHelper.IsStrNull(info.getContent())) {
+			return Result.Fail("内容不能为空");
+		}
+		int ret = dal.Update(info);
+		if (ret > 0) {
+			return Result.Success("修改成功");
+		}
+		return Result.Fail("修改失败");
+
+	}
 
 	public jqOutInfo<AccidentInfo> List(AccidentInfo info, int iDisplayStart,
 			int iDisplayLength) {

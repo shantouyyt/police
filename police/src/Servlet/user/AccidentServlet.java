@@ -13,6 +13,7 @@ import Model.DriverInfo;
 import Model.Result;
 import Model.UsersInfo;
 import Service.AccidentService;
+import Utils.StringHelper;
 import Utils.WebUtils;
 import Utils.JqTable.jqOutInfo;
 import Utils.JqTable.jqProcessInfo;
@@ -128,6 +129,23 @@ public class AccidentServlet extends HttpServlet {
 			out.flush();
 			out.close();
 			return;
+		}else if ("get".equals(act)) {
+			// 得到单个实体
+			String data = request.getParameter("data");
+			AccidentInfo info = as.GetInfoByID(StringHelper.Str2Int(data));
+			// 输出
+			if (info == null) {
+				oret.statusID = 0;
+				oret.message = "查询失败";
+			} else {
+				oret.statusID = 1;
+				oret.message = info.toString();
+			}
+		}else if ("update".equals(act)) {
+			// 修改
+			String data = request.getParameter("data");
+			AccidentInfo bean = gson.fromJson(data, AccidentInfo.class);
+			oret = as.Update(bean);
 		}
 
 		String json = gson.toJson(oret);
