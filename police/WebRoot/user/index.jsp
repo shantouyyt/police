@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
      <form id="form1" >
         <header class="Hui-header cl">
-              <span class="Hui-subtitle l"> &nbsp; &nbsp;管理后台</span>
+              <span class="Hui-subtitle l"> &nbsp; &nbsp;警员管理后台</span>
 
             <ul class="Hui-userbar">
                 
@@ -39,28 +39,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <dl id="Dl12">
                     <li><a _href="AccidentAdd.jsp" data-title="事故登记表" href="javascript:void(0)">事故登记表</a></li>
                 </dl>
+                
                 <dl id="Dl13">
-                    <li><a _href="article-list.html" data-title="管理员管理" href="javascript:void(0)">管理员管理</a></li>
+                    <li><a _href="article-list.html" data-title="驾驶员信息" href="javascript:void(0)">驾驶员信息</a></li>
                 </dl>
-                <dl id="Dl14">
-                    <li><a _href="article-list.html" data-title="商家管理" href="javascript:void(0)">商家管理</a></li>
-                </dl>
-                <dl id="Dl15">
-                    <li><a _href="article-list.html" data-title="商品管理" href="javascript:void(0)">商品管理</a></li>
-                </dl>
-                <dl id="Dl1">
-                    <li><a _href="/system/userlist.aspx" data-title="用户管理" href="javascript:void(0)">用户管理</a></li>
-                </dl>
+          
 
-
-                <!-- <dl id="Dl12">
-			<dt><i class="Hui-iconfont">&#xe616;</i> 修改密码<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a _href="article-list.html" data-title="修改密码" href="javascript:void(0)">修改密码</a></li>
-				</ul>
-			</dd>
-		</dl>-->
 
             </div>
         </aside>
@@ -79,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div style="display: none" class="loading"></div>
                     <%--<iframe scrolling="yes" frameborder="0" src="welcome.html"></iframe>--%>
                     
-                    <p class="f-20 text-success">警员管理系统！</p>
+                     <p class="f-20 text-success" style="margin-top: 138px;font-size: 38px;">警员后台！</p>
 
                 </div>
             </div>
