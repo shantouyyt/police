@@ -35,10 +35,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="menu_dropdown bk_2">
                 
                 <dl id="Dl12">
-                    <li><a _href="UsersList.jsp" data-title="警员管理" href="javascript:void(0)">警员管理</a></li>
+                    <li><a _href="UsersList.jsp" data-title="民警信息" href="javascript:void(0)">民警信息</a></li>
                 </dl>
                 <dl id="Dl13">
-                    <li><a _href="article-list.html" data-title="管理员管理" href="javascript:void(0)">管理员管理</a></li>
+                    <li><a _href="article-list.html" data-title="事故信息" href="javascript:void(0)">事故信息</a></li>
                 </dl>
                 <dl id="Dl14">
                     <li><a _href="article-list.html" data-title="商家管理" href="javascript:void(0)">商家管理</a></li>
@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div style="display: none" class="loading"></div>
                     <%--<iframe scrolling="yes" frameborder="0" src="welcome.html"></iframe>--%>
                     
-                    <p class="f-20 text-success">管理后台！</p>
+                    <p class="f-20 text-success" style="margin-top: 138px;font-size: 38px;">领导后台！</p>
 
                 </div>
             </div>

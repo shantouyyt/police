@@ -8,11 +8,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <%@ include file="../common/head.jsp" %>
-	<title>用户管理</title>
+	<title>民警信息</title>
   </head>
   
   <body>
-    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页  <span class="c-gray en">&gt;</span> 用户管理 
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页  <span class="c-gray en">&gt;</span> 民警信息
 	    <a class="btn btn-success radius r mr-20" style="line-height: 1.6em; margin-top: 3px" 
 	    	href="#"  onclick="aupdate();"  title="刷新">
 	    	<i class="Hui-iconfont">&#xe68f;</i>
@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <th width="10%">性别</th>
                         <th width="20%">创建日期</th>
                         <th width="20%">类型</th>
-                        <th width="10%">操作</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -87,15 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     			return "警员";
                     	}
                    	},
-                    {
-                        "mData": "",
-                        "render": function (data, type, full, meta) {
-                            var html = "";
-        					html = '<a data-title="修改" _href="UsersAdd.jsp?id='+full.id+'" onclick="Hui_admin_tab(this)" href="javascript:;" ">修改</a>';
-                            html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'delete\',' + full.id + ',this);">删除</a>';
-                            return html;
-                        }
-                    },
+                    
                 ],
 				
                 "fnServerData": fnServerData
@@ -174,7 +166,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         
         function aupdate(){
-        	table.fnDraw();
+        	//table.fnDraw();
+        	location.reload();
         }
 		
 	</script>
