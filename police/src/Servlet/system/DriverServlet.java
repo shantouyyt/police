@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Model.DriverInfo;
+import Model.InPoliceInfo;
 import Model.Result;
 import Service.DriverService;
+import Utils.WebUtils;
+import Utils.JqTable.jqOutInfo;
+import Utils.JqTable.jqProcessInfo;
 
 import com.google.gson.Gson;
 
@@ -93,6 +97,22 @@ public class DriverServlet extends HttpServlet {
 			String data = request.getParameter("data");
 			DriverInfo bean = gson.fromJson(data, DriverInfo.class);
 			oret = us.Insert(bean);
+		} else if ("list".equals(act)) {
+			// 查询列表
+			jqProcessInfo jpi = WebUtils.GetJqProcessInfo(request);
+
+			String data = request.getParameter("data");
+			DriverInfo bean = gson.fromJson(data, DriverInfo.class);
+
+			jqOutInfo<DriverInfo> oinfo = us.List(bean, jpi.getiDisplayStart(),
+					jpi.getiDisplayLength());
+
+			oinfo.setsEcho(jpi.getsEcho());
+			// 输出
+			out.print(oinfo.toString());
+			out.flush();
+			out.close();
+			return;
 		}
 
 		String json = gson.toJson(oret);
