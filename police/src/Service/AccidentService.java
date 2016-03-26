@@ -2,8 +2,10 @@ package Service;
 
 import Dal.AccidentDal;
 import Model.AccidentInfo;
+import Model.DriverInfo;
 import Model.Result;
 import Utils.StringHelper;
+import Utils.JqTable.jqOutInfo;
 
 public class AccidentService {
 	private AccidentDal dal = new AccidentDal();
@@ -33,5 +35,17 @@ public class AccidentService {
 			return Result.Fail("添加失败");
 		}
 		return Result.Success("添加成功");
+	}
+
+	public jqOutInfo<AccidentInfo> List(AccidentInfo info, int iDisplayStart,
+			int iDisplayLength) {
+
+		info.setName(StringHelper.StringFilter(info.getName()));
+
+		return dal.List(info, iDisplayStart, iDisplayLength);
+	}
+	
+	public AccidentInfo GetInfoByID(int id) {
+		return dal.GetInfoByID(id);
 	}
 }

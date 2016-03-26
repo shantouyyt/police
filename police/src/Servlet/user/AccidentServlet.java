@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Model.AccidentInfo;
+import Model.DriverInfo;
 import Model.Result;
 import Model.UsersInfo;
 import Service.AccidentService;
+import Utils.WebUtils;
+import Utils.JqTable.jqOutInfo;
+import Utils.JqTable.jqProcessInfo;
 
 import com.google.gson.Gson;
 
@@ -108,6 +112,22 @@ public class AccidentServlet extends HttpServlet {
 
 			bean.setUserID(sessionInfo.getId());
 			oret = as.Insert(bean);
+		}else if ("list".equals(act)) {
+			// 查询列表
+			jqProcessInfo jpi = WebUtils.GetJqProcessInfo(request);
+
+			String data = request.getParameter("data");
+			AccidentInfo bean = gson.fromJson(data, AccidentInfo.class);
+
+			jqOutInfo<AccidentInfo> oinfo = as.List(bean, jpi.getiDisplayStart(),
+					jpi.getiDisplayLength());
+
+			oinfo.setsEcho(jpi.getsEcho());
+			// 输出
+			out.print(oinfo.toString());
+			out.flush();
+			out.close();
+			return;
 		}
 
 		String json = gson.toJson(oret);

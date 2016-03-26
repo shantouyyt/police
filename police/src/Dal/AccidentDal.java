@@ -4,6 +4,7 @@ import java.util.List;
 
 import DBManager.JDBCJNDI;
 import Model.AccidentInfo;
+import Model.DriverInfo;
 import Model.InPoliceInfo;
 import Utils.StringHelper;
 import Utils.JqTable.jqOutInfo;
@@ -62,5 +63,12 @@ public class AccidentDal {
 		return joi;
 	}
 
-
+	public AccidentInfo GetInfoByID(int id) {
+		String sql = "select * from Accident where id=" + id;
+		return JDBCJNDI.queryInfo(AccidentInfo.class, sql, null);
+	}
+	public int Delete(int id) {
+		String sql = "delete from  Accident where id=" + id;
+		return JDBCJNDI.update(sql, null, false);
+	}
 }
