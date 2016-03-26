@@ -174,7 +174,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         
         function aupdate(){
-        	table.fnDraw();
+        	//table.fnDraw();
+        	location.reload();
         }
 		
 	</script>

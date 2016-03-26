@@ -199,7 +199,8 @@
 	}
 
 	function aupdate() {
-		table.fnDraw();
+		//table.fnDraw();
+		location.reload();
 	}
 </script>
 </html>
