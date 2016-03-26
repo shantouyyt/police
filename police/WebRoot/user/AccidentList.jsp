@@ -127,19 +127,17 @@
 										"mData" : "",
 										"render" : function(data, type, full,meta) {
 											var html = "";
-											html = '<a data-title="查看事故登记表" _href="AccidentInfo.jsp?id='
-													+ full.id
-													+ '" onclick="Hui_admin_tab(this)" href="javascript:;" ">查看</a>';
+											html = 	 '<a data-title="查看事故登记表" _href="AccidentInfo.jsp?id='
+											html +=  	full.id
+											html +=  '" onclick="Hui_admin_tab(this)" href="javascript:;">查看</a>';
 											if(full.status=="0"){
 												//未审批
-												html += '&nbsp;&nbsp;<a data-title="修改事故登记表" _href="AccidentAdd.jsp?id='
-													+ full.id
-													+ '" onclick="Hui_admin_tab(this)" href="javascript:;" ">修改</a>';
+												html += '&nbsp;&nbsp;<a data-title="修改事故登记表" _href="AccidentAdd.jsp?id='+ full.id + '" onclick="Hui_admin_tab(this)" href="javascript:;" >修改</a>';
 											}
 													
 											return html;
 										}
-									}, ],
+									} ],
 
 							"fnServerData" : fnServerData
 						});

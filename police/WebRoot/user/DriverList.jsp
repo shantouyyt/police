@@ -111,7 +111,7 @@
 											var html = "";
 											html = '<a data-title="修改驾驶员" _href="DriverAdd.jsp?id='
 													+ full.id
-													+ '" onclick="Hui_admin_tab(this)" href="javascript:;" ">查看</a>';
+													+ '" onclick="Hui_admin_tab(this)" href="javascript:;" >查看</a>';
 													
 											return html;
 										}
