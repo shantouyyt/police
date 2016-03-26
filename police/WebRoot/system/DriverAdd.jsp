@@ -112,7 +112,7 @@
 			data["data"] = id;
 			$
 					.ajax({
-						url : '${pageContext.request.contextPath}/servlet/InPoliceServlet',
+						url : '${pageContext.request.contextPath}/servlet/DriverServlet',
 						data : data,
 						type : 'post',
 						cache : false,

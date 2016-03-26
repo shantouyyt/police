@@ -12,6 +12,7 @@ import Model.DriverInfo;
 import Model.InPoliceInfo;
 import Model.Result;
 import Service.DriverService;
+import Utils.StringHelper;
 import Utils.WebUtils;
 import Utils.JqTable.jqOutInfo;
 import Utils.JqTable.jqProcessInfo;
@@ -113,7 +114,29 @@ public class DriverServlet extends HttpServlet {
 			out.flush();
 			out.close();
 			return;
+		} else if ("delete".equals(act)) {
+			// 删除
+			String data = request.getParameter("data");
+			oret = us.Delete(StringHelper.Str2Int(data));
+		}else if ("get".equals(act)) {
+			// 得到单个实体
+			String data = request.getParameter("data");
+			DriverInfo info = us.GetInfoByID(StringHelper.Str2Int(data));
+			// 输出
+			if (info == null) {
+				oret.statusID = 0;
+				oret.message = "查询失败";
+			} else {
+				oret.statusID = 1;
+				oret.message = info.toString();
+			}
+		} else if ("update".equals(act)) {
+			// 修改
+			String data = request.getParameter("data");
+			DriverInfo bean = gson.fromJson(data, DriverInfo.class);
+			oret = us.Update(bean);
 		}
+
 
 		String json = gson.toJson(oret);
 		out.print(json);
