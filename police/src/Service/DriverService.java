@@ -18,6 +18,8 @@ public class DriverService {
 		if (StringHelper.IsStrNull(info.getLicenseExpire())) {
 			return Result.Fail("驾驶证到期时间不能为空");
 		}
+		info.setCreateDate(StringHelper.GetCurrentDate());
+		
 		int Count = dal.Insert(info);
 		if (Count == 0) {
 			return Result.Fail("添加失败");

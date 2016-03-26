@@ -10,7 +10,7 @@
 <html>
 <head>
 <%@ include file="../common/head.jsp"%>
-<title>增加接警</title>
+<title>增加驾驶员</title>
 
 </head>
 
@@ -20,16 +20,41 @@
 		<form action="" method="post" class="form form-horizontal" id="form">
 
 			<div class="row cl">
-				<label class="form-label col-2"><span class="c-red">*</span>报警人姓名：</label>
+				<label class="form-label col-2"><span class="c-red">*</span>姓名：</label>
 				<div class="formControls col-5">
 					<input maxlength="100" type="text" class="input-text" value=""
 						placeholder="" id="name" name="name">
 				</div>
 				<div class="col-4"></div>
 			</div>
+			<div class="row cl">
+				<label class="form-label col-2"><span class="c-red">*</span>驾驶证：</label>
+				<div class="formControls col-5">
+					<input maxlength="100" type="text" class="input-text" value=""
+						placeholder="" id="license" name="license">
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-2">驾驶证到期时间：</label>
+				<div class="formControls col-2">
+					<input name="licenseExpire" type="text"
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+						id="licenseExpire" class="input-text Wdate">
+				</div>
+			</div>
 
 			<div class="row cl">
-				<label class="form-label col-2"><span class="c-red">*</span>报警人电话：</label>
+				<label class="form-label col-2">地址：</label>
+				<div class="formControls col-5">
+					<input maxlength="100" type="text" class="input-text" value=""
+						placeholder="" id="address" name="address">
+				</div>
+				<div class="col-4"></div>
+			</div>
+
+			<div class="row cl">
+				<label class="form-label col-2">电话：</label>
 				<div class="formControls col-5">
 					<input maxlength="20" type="text" class="input-text" value=""
 						placeholder="" id="tel" name="tel">
@@ -74,46 +99,47 @@
 <%@ include file="../common/script.jsp"%>
 <script>
 	var id = getUrlVar("id");
-	if(id > 0){
+	if (id > 0) {
 		$("#id").val(id);
-	}else{
+	} else {
 		$("#id").val(0);
 	}
-	
-	$(function(){
-		if(id > 0){
+
+	$(function() {
+		if (id > 0) {
 			var data = {};
 			data["act"] = "get";
 			data["data"] = id;
-			$.ajax({
-				url : '${pageContext.request.contextPath}/servlet/InPoliceServlet',
-				data : data,
-				type : 'post',
-				cache : false,
-				dataType : 'json',
-				success : function(r) {
-					if (r.statusID > 0) {
-						Json2Form(JSON.parse(r.message));
-					}else{
-						alert(r.message);
-					}
-				},
-				error : function() {
-					alert("操作失败");
-				}
-			});
+			$
+					.ajax({
+						url : '${pageContext.request.contextPath}/servlet/InPoliceServlet',
+						data : data,
+						type : 'post',
+						cache : false,
+						dataType : 'json',
+						success : function(r) {
+							if (r.statusID > 0) {
+								Json2Form(JSON.parse(r.message));
+							} else {
+								alert(r.message);
+							}
+						},
+						error : function() {
+							alert("操作失败");
+						}
+					});
 		}
 	});
 	function btn_Opt() {
 		var data = {};
-		if(id>0){
+		if (id > 0) {
 			data["act"] = "update";
-		}else{
+		} else {
 			data["act"] = "add";
 		}
 		data["data"] = $.toJSON($("#form").serializeObject());
 		$.ajax({
-			url : '${pageContext.request.contextPath}/servlet/InPoliceServlet',
+			url : '${pageContext.request.contextPath}/servlet/DriverServlet',
 			data : data,
 			type : 'post',
 			cache : false,
