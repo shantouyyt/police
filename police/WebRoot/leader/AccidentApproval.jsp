@@ -25,17 +25,16 @@
 
 		<form id="searchform">
 			<div class="text-c">
-				<input type="text"
-					class="input-text" style="width: 250px" placeholder="路段" id="accidentSite"
-					name="accidentSite">
-					
+				<input type="text" class="input-text" style="width: 250px"
+					placeholder="路段" id="accidentSite" name="accidentSite">
+
 				<button onclick="search();" type="button"
 					class="btn btn-success radius" id="Button1" name="">
 					<i class="Hui-iconfont">&#xe665;</i> 搜索
 				</button>
 			</div>
 		</form>
-		
+
 
 
 
@@ -48,10 +47,11 @@
 						<th width="8%">姓名</th>
 						<th width="10%">性别</th>
 						<th width="10%">手机号码</th>
-						
+
 						<th width="10%">交通方式</th>
 						<th width="20%">事故地点</th>
 						<th width="20%">事故日期</th>
+						<th width="10%">状态</th>
 						<th width="20%">操作</th>
 					</tr>
 				</thead>
@@ -106,26 +106,36 @@
 										"mData" : "createDate"
 									},
 									{
+										"mData" : "status",
+										"render" : function(data, type, full,
+												meta) {
+											if (data == "-1") {
+												return "未通过";
+											} else if (data == "0") {
+												return "未审批";
+											}
+											return "通过";
+										}
+									},
+									{
 										"mData" : "",
-										"render" : function(data, type, full,meta) {
-											var html = "";
-											html = 	 '<a data-title="查看事故登记表" _href="AccidentInfo.jsp?id='
-											html +=  	full.id
-											html +=  '" onclick="Hui_admin_tab(this)" href="javascript:;">查看</a>';
+										"render" : function(data, type, full,
+												meta) {
+											var html = "--";
+											if (full.status == 0) {
+												html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'updateStatus\','
+														+ full.id
+														+ ',1);">通过</a>';
+												html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'updateStatus\','
+														+ full.id
+														+ ',-1);">不通过</a>';
+											}
 
-											html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'delete\','
-													+ full.id
-													+ ',this);">通过</a>';
-											html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'delete\','
-													+ full.id
-													+ ',this);">不通过</a>';		
-													
 											return html;
 										}
-									} 
+									}
 
-									
-									],
+							],
 
 							"fnServerData" : fnServerData
 						});
@@ -165,34 +175,36 @@
 		table.fnDraw();
 	}
 	//通过与否
-	function operation(ActionName, UserID, Row) {
-			var data = {};
-			data["act"] = "delete";
-			data["data"] = UserID;
-			$
-					.ajax({
-						url : '${pageContext.request.contextPath}/servlet/DriverServlet',
-						data : data,
-						type : 'post',
-						cache : false,
-						dataType : 'json',
-						success : function(r) {
-							alert(r.message);
-							if (r.statusID > 0) {
-								//当前页刷新
-								var _iDisplayStart = table.fnSettings()._iDisplayStart;
-								var _iDisplayLength = table.fnSettings()._iDisplayLength;
-								var page = _iDisplayStart / _iDisplayLength;
-								table.fnPageChange(page);
-							}
-						},
-						error : function() {
-							alert("操作失败");
+	function operation(ActionName, ID, Status) {
+		var data = {};
+		data["act"] = ActionName;
+		var info = {};
+		info.id = ID;
+		info.status = Status;
+		data["data"] = $.toJSON(info);
+		$
+				.ajax({
+					url : '${pageContext.request.contextPath}/servlet/AccidentApproval',
+					data : data,
+					type : 'post',
+					cache : false,
+					dataType : 'json',
+					success : function(r) {
+						alert(r.message);
+						if (r.statusID > 0) {
+							//当前页刷新
+							var _iDisplayStart = table.fnSettings()._iDisplayStart;
+							var _iDisplayLength = table.fnSettings()._iDisplayLength;
+							var page = _iDisplayStart / _iDisplayLength;
+							table.fnPageChange(page);
 						}
-					});
-		
-	}
+					},
+					error : function() {
+						alert("操作失败");
+					}
+				});
 
+	}
 
 	function aupdate() {
 		//table.fnDraw();
