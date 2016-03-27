@@ -3,6 +3,7 @@ package Model;
 import com.google.gson.Gson;
 
 public class AccidentApprovalInfo {
+	
 	public int getId() {
 		return id;
 	}
@@ -52,7 +53,14 @@ public class AccidentApprovalInfo {
 	private String leaderRemark;
 	private String createDate;
 	private String endDate;
+	private int userID;
 	
+	public int getUserID() {
+		return userID;
+	}
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
 	public String toString(){
 		return new Gson().toJson(this);
 	}
