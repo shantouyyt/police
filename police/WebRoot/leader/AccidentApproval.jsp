@@ -10,13 +10,13 @@
 <html>
 <head>
 <%@ include file="../common/head.jsp"%>
-<title>查看路段历史</title>
+<title>处理审批</title>
 
 </head>
 
 <body>
 	<nav class="breadcrumb"> <i class="Hui-iconfont">&#xe67f;</i> 首页
-	<span class="c-gray en">&gt;</span>查看路段历史 <a
+	<span class="c-gray en">&gt;</span>处理审批 <a
 		class="btn btn-success radius r mr-20"
 		style="line-height: 1.6em; margin-top: 3px" href="#"
 		onclick="aupdate();" title="刷新"> <i class="Hui-iconfont">&#xe68f;</i>
@@ -52,7 +52,7 @@
 						<th width="10%">交通方式</th>
 						<th width="20%">事故地点</th>
 						<th width="20%">事故日期</th>
-
+						<th width="20%">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -105,6 +105,24 @@
 									{
 										"mData" : "createDate"
 									},
+									{
+										"mData" : "",
+										"render" : function(data, type, full,meta) {
+											var html = "";
+											html = 	 '<a data-title="查看事故登记表" _href="AccidentInfo.jsp?id='
+											html +=  	full.id
+											html +=  '" onclick="Hui_admin_tab(this)" href="javascript:;">查看</a>';
+
+											html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'delete\','
+													+ full.id
+													+ ',this);">通过</a>';
+											html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'delete\','
+													+ full.id
+													+ ',this);">不通过</a>';		
+													
+											return html;
+										}
+									} 
 
 									
 									],
@@ -145,6 +163,34 @@
 	//搜索
 	function search() {
 		table.fnDraw();
+	}
+	//通过与否
+	function operation(ActionName, UserID, Row) {
+			var data = {};
+			data["act"] = "delete";
+			data["data"] = UserID;
+			$
+					.ajax({
+						url : '${pageContext.request.contextPath}/servlet/DriverServlet',
+						data : data,
+						type : 'post',
+						cache : false,
+						dataType : 'json',
+						success : function(r) {
+							alert(r.message);
+							if (r.statusID > 0) {
+								//当前页刷新
+								var _iDisplayStart = table.fnSettings()._iDisplayStart;
+								var _iDisplayLength = table.fnSettings()._iDisplayLength;
+								var page = _iDisplayStart / _iDisplayLength;
+								table.fnPageChange(page);
+							}
+						},
+						error : function() {
+							alert("操作失败");
+						}
+					});
+		
 	}
 
 
