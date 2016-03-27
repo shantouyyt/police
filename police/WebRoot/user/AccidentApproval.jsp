@@ -26,6 +26,14 @@
 		<form id="searchform">
 			<div class="text-c">
 				<input type="hidden" id="status" name="status" value="3" />
+				<span class="select-box inline">
+					<select name="approvalstatus" class="select" id="approvalstatus">
+						<option value="0">全部</option>
+						<option value="2">待审批</option>
+						<option value="3">已通过</option>
+						<option value="1">未通过</option>
+					</select>
+				</span>
 				日期范围：
                 <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}',dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="datemin" name="createDate" class="input-text Wdate" style="width: 170px;">
                     -
@@ -56,8 +64,8 @@
 						<th width="10%">交通方式</th>
 						<th width="20%">事故地点</th>
 						<th width="15%">事故日期</th>
-						
-						<th width="20%">操作</th>
+						<th>状态</th>
+						<th width="10%">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -113,17 +121,25 @@
 									{
 										"mData" : "createDate"
 									},
-									
+									{
+										"mData" : "approvalstatus",
+										"render" : function(data, type, full,
+												meta) {
+											if (data == "1") {
+												return "未通过";
+											} else if (data == "2") {
+												return "待审批";
+											}
+											return "已通过";
+										}
+									},
 									{
 										"mData" : "",
 										"render" : function(data, type, full,meta) {
 											var html = "";
-											html = 	 '<a data-title="查看事故登记表" _href="AccidentInfo.jsp?id='
-											html +=  	full.id
-											html +=  '" onclick="Hui_admin_tab(this)" href="javascript:;">查看</a>';
 											if(full.status=="3"){
 												//已审批
-												html += '&nbsp;&nbsp;<a data-title="填写审批" _href="AccidentAdd.jsp?id='+ full.id + '" onclick="Hui_admin_tab(this)" href="javascript:;" >填写审批</a>';
+												html += '&nbsp;&nbsp;<a data-title="填写审批" _href="AccidentApprovalAdd.jsp?id='+ full.id + '" onclick="Hui_admin_tab(this)" href="javascript:;" >填写审批</a>';
 											}
 													
 											return html;

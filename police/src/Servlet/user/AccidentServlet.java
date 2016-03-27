@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Model.AccidentApprovalInfo;
 import Model.AccidentInfo;
 import Model.DriverInfo;
 import Model.Result;
 import Model.UsersInfo;
+import Service.AccidentApprovalService;
 import Service.AccidentService;
 import Utils.StringHelper;
 import Utils.WebUtils;
@@ -93,9 +95,9 @@ public class AccidentServlet extends HttpServlet {
 		AccidentService as = new AccidentService();
 		Result oret = Result.Fail("用户未登陆或者登陆超时");
 		Gson gson = new Gson();
-		
-		UsersInfo sessionInfo = (UsersInfo) request.getSession()
-				.getAttribute("UsersInfo");
+
+		UsersInfo sessionInfo = (UsersInfo) request.getSession().getAttribute(
+				"UsersInfo");
 		if (sessionInfo == null) {
 			String json = gson.toJson(oret);
 			out.print(json);
@@ -113,15 +115,15 @@ public class AccidentServlet extends HttpServlet {
 
 			bean.setUserID(sessionInfo.getId());
 			oret = as.Insert(bean);
-		}else if ("list".equals(act)) {
+		} else if ("list".equals(act)) {
 			// 查询列表
 			jqProcessInfo jpi = WebUtils.GetJqProcessInfo(request);
 
 			String data = request.getParameter("data");
 			AccidentInfo bean = gson.fromJson(data, AccidentInfo.class);
 
-			jqOutInfo<AccidentInfo> oinfo = as.List(bean, jpi.getiDisplayStart(),
-					jpi.getiDisplayLength());
+			jqOutInfo<AccidentInfo> oinfo = as.List(bean,
+					jpi.getiDisplayStart(), jpi.getiDisplayLength());
 
 			oinfo.setsEcho(jpi.getsEcho());
 			// 输出
@@ -129,7 +131,7 @@ public class AccidentServlet extends HttpServlet {
 			out.flush();
 			out.close();
 			return;
-		}else if ("get".equals(act)) {
+		} else if ("get".equals(act)) {
 			// 得到单个实体
 			String data = request.getParameter("data");
 			AccidentInfo info = as.GetInfoByID(StringHelper.Str2Int(data));
@@ -141,11 +143,31 @@ public class AccidentServlet extends HttpServlet {
 				oret.statusID = 1;
 				oret.message = info.toString();
 			}
-		}else if ("update".equals(act)) {
+		} else if ("update".equals(act)) {
 			// 修改
 			String data = request.getParameter("data");
 			AccidentInfo bean = gson.fromJson(data, AccidentInfo.class);
 			oret = as.Update(bean);
+		} else if ("approvaladd".equals(act)) {
+			// 填写审批
+			String data = request.getParameter("data");
+			AccidentApprovalInfo bean = gson.fromJson(data,
+					AccidentApprovalInfo.class);
+			AccidentApprovalService aas = new AccidentApprovalService();
+			oret = aas.Insert(bean);
+		} else if ("approvalget".equals(act)) {
+			// 得到单个实体
+			String data = request.getParameter("data");
+			AccidentApprovalService aas = new AccidentApprovalService();
+			AccidentApprovalInfo info = aas.GetInfoByAccidentNo(data);
+			// 输出
+			if (info == null) {
+				oret.statusID = 0;
+				oret.message = "查询失败";
+			} else {
+				oret.statusID = 1;
+				oret.message = info.toString();
+			}
 		}
 
 		String json = gson.toJson(oret);

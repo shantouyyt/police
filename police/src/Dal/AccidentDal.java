@@ -44,29 +44,32 @@ public class AccidentDal {
 	public jqOutInfo<AccidentInfo> List(AccidentInfo info, int iDisplayStart,
 			int iDisplayLength) {
 
-		String sql = "select * from Accident where 1=1 ";
+		String sql = "select Accident.*,accidentapproval.status as approvalstatus from Accident left join accidentapproval on accident.id = accidentapproval.AccidentNo  where 1=1 ";
 
 		StringBuilder sb = new StringBuilder();
 		if (info.getId() > 0) {
-			sb.append(" and ID =").append(info.getId()).append("");
+			sb.append(" and Accident.ID =").append(info.getId()).append("");
 		}
 		if(info.getStatus() > 0){
-			sb.append(" and Status =").append(info.getStatus()).append("");
+			sb.append(" and Accident.Status =").append(info.getStatus()).append("");
+		}
+		if(info.getApprovalstatus() > 0){
+			sb.append(" and accidentapproval.Status =").append(info.getApprovalstatus()).append("");
 		}
 		
 		if (info.getUserID() > 0) {
-			sb.append(" and UserID =").append(info.getUserID()).append("");
+			sb.append(" and Accident.UserID =").append(info.getUserID()).append("");
 		}
 		if (!StringHelper.IsStrNull(info.getCreateDate())) {
-			sb.append(" and CreateDate >='").append(info.getCreateDate())
+			sb.append(" and Accident.CreateDate >='").append(info.getCreateDate())
 					.append("' ");
 		}
 		if (!StringHelper.IsStrNull(info.getEndDate())) {
-			sb.append(" and CreateDate <='").append(info.getEndDate())
+			sb.append(" and Accident.CreateDate <='").append(info.getEndDate())
 					.append("' ");
 		}
 		if (!StringHelper.IsStrNull(info.getAccidentSite())) {
-			sb.append(" and AccidentSite like '%")
+			sb.append(" and Accident.AccidentSite like '%")
 					.append(info.getAccidentSite()).append("%' ");
 		}
 

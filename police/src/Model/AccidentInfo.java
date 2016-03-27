@@ -80,7 +80,14 @@ public class AccidentInfo {
 	private String tel;
 	private String sex;
 	private int userID;
+	private int approvalstatus;
 	
+	public int getApprovalstatus() {
+		return approvalstatus;
+	}
+	public void setApprovalstatus(int approvalstatus) {
+		this.approvalstatus = approvalstatus;
+	}
 	public String toString(){
 		return new Gson().toJson(this);
 	}
