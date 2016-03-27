@@ -121,6 +121,10 @@ public class AccidentServlet extends HttpServlet {
 
 			String data = request.getParameter("data");
 			AccidentInfo bean = gson.fromJson(data, AccidentInfo.class);
+			//警员
+			if (sessionInfo.getUserType() == 1) {
+				bean.setUserID(sessionInfo.getId());
+			}
 
 			jqOutInfo<AccidentInfo> oinfo = as.List(bean,
 					jpi.getiDisplayStart(), jpi.getiDisplayLength());
@@ -156,7 +160,7 @@ public class AccidentServlet extends HttpServlet {
 			AccidentApprovalService aas = new AccidentApprovalService();
 			oret = aas.Insert(bean);
 		} else if ("approvalget".equals(act)) {
-			// 得到单个实体
+			// 得到审批单个实体
 			String data = request.getParameter("data");
 			AccidentApprovalService aas = new AccidentApprovalService();
 			AccidentApprovalInfo info = aas.GetInfoByAccidentNo(data);

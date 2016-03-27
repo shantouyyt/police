@@ -41,10 +41,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a _href="AccidentList.jsp" data-title="事故信息" href="javascript:void(0)">事故信息</a></li>
                 </dl>
                 <dl id="Dl14">
-                    <li><a _href="AccidentApproval.jsp" data-title="处理审批" href="javascript:void(0)">处理审批</a></li>
+                    <li><a _href="AccidentApproval.jsp" data-title="是否处理审批" href="javascript:void(0)">是否处理审批</a></li>
                 </dl>
                 <dl id="Dl15">
-                    <li><a _href="article-list.html" data-title="结果审批" href="javascript:void(0)">结果审批</a></li>
+                    <li><a _href="article-list.html" data-title="处理结果审批" href="javascript:void(0)">处理结果审批</a></li>
                 </dl>
                
 
