@@ -37,6 +37,14 @@ public class AccidentService {
 		return Result.Success("添加成功");
 	}
 	
+	public Result UpdateStatus(AccidentInfo info) {
+		int ret = dal.UpdateStatus(info.getStatus(), info.getId());
+		if (ret > 0) {
+			return Result.Success("操作成功");
+		}
+		return Result.Fail("操作失败");
+	}
+	
 	public Result Update(AccidentInfo info) {
 		if (StringHelper.IsStrNull(info.getName())) {
 			return Result.Fail("姓名不能为空");

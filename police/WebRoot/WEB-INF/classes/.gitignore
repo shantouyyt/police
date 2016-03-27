@@ -1,2 +1,7 @@
-/leader
+/DBManager
+/Dal
+/Model
+/Service
 /Servlet
+/Utils
+/test
