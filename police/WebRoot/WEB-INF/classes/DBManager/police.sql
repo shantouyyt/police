@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50622
+Source Server         : police
+Source Server Version : 50067
 Source Host           : localhost:3306
 Source Database       : police
 
 Target Server Type    : MYSQL
-Target Server Version : 50622
+Target Server Version : 50067
 File Encoding         : 65001
 
-Date: 2016-03-27 12:44:56
+Date: 2016-03-27 20:32:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,18 +20,18 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `accident`;
 CREATE TABLE `accident` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `TrafficMode` varchar(100) DEFAULT NULL,
-  `AccidentSite` varchar(200) DEFAULT NULL,
-  `CreateDate` varchar(50) DEFAULT NULL,
-  `Content` varchar(600) DEFAULT NULL,
-  `Status` int(11) DEFAULT NULL,
-  `Name` varchar(20) DEFAULT NULL,
-  `Tel` varchar(20) DEFAULT NULL,
-  `Sex` int(11) DEFAULT NULL,
-  `UserID` int(11) DEFAULT NULL,
-  `AccidentNo` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `ID` int(11) NOT NULL auto_increment,
+  `TrafficMode` varchar(100) default NULL,
+  `AccidentSite` varchar(200) default NULL,
+  `CreateDate` varchar(50) default NULL,
+  `Content` varchar(600) default NULL,
+  `Status` int(11) default NULL,
+  `Name` varchar(20) default NULL,
+  `Tel` varchar(20) default NULL,
+  `Sex` int(11) default NULL,
+  `UserID` int(11) default NULL,
+  `AccidentNo` varchar(50) default NULL,
+  PRIMARY KEY  (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -45,33 +45,35 @@ INSERT INTO `accident` VALUES ('3', 'sdf', 'sdf', '2016-03-27 11:03:13', 'sdf', 
 -- ----------------------------
 DROP TABLE IF EXISTS `accidentapproval`;
 CREATE TABLE `accidentapproval` (
-  `ID` int(11) DEFAULT NULL,
-  `AccidentNo` varchar(50) DEFAULT NULL,
-  `Remark` varchar(400) DEFAULT NULL,
-  `Status` int(11) DEFAULT NULL,
-  `LeaderRemark` varchar(400) DEFAULT NULL,
-  `CreateDate` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ID` int(11) NOT NULL auto_increment,
+  `AccidentNo` varchar(50) default NULL,
+  `Remark` varchar(400) default NULL,
+  `Status` int(11) default NULL,
+  `LeaderRemark` varchar(400) default NULL,
+  `CreateDate` varchar(50) default NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of accidentapproval
 -- ----------------------------
+INSERT INTO `accidentapproval` VALUES ('1', '3', '审批内容', '3', null, '2016-03-27 06:55:21');
 
 -- ----------------------------
 -- Table structure for driver
 -- ----------------------------
 DROP TABLE IF EXISTS `driver`;
 CREATE TABLE `driver` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(20) DEFAULT NULL,
-  `Sex` int(11) DEFAULT NULL,
-  `Tel` varchar(20) DEFAULT NULL,
-  `License` varchar(50) DEFAULT NULL,
-  `LicenseExpire` varchar(50) DEFAULT NULL,
-  `Address` varchar(200) DEFAULT NULL,
-  `CreateDate` varchar(50) DEFAULT NULL,
-  `Remark` varchar(400) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `ID` int(11) NOT NULL auto_increment,
+  `Name` varchar(20) default NULL,
+  `Sex` int(11) default NULL,
+  `Tel` varchar(20) default NULL,
+  `License` varchar(50) default NULL,
+  `LicenseExpire` varchar(50) default NULL,
+  `Address` varchar(200) default NULL,
+  `CreateDate` varchar(50) default NULL,
+  `Remark` varchar(400) default NULL,
+  PRIMARY KEY  (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -90,13 +92,13 @@ INSERT INTO `driver` VALUES ('7', 'sdfs', '1', 'sdf', 'dfsdf', '2016-03-23 10:31
 -- ----------------------------
 DROP TABLE IF EXISTS `inpolice`;
 CREATE TABLE `inpolice` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(50) DEFAULT NULL,
-  `Sex` int(11) DEFAULT NULL,
-  `CreateDate` varchar(50) DEFAULT NULL,
-  `Remark` varchar(400) DEFAULT NULL,
-  `Tel` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `ID` int(11) NOT NULL auto_increment,
+  `Name` varchar(50) default NULL,
+  `Sex` int(11) default NULL,
+  `CreateDate` varchar(50) default NULL,
+  `Remark` varchar(400) default NULL,
+  `Tel` varchar(20) default NULL,
+  PRIMARY KEY  (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -118,14 +120,14 @@ INSERT INTO `inpolice` VALUES ('30', 'f', '1', '2016-03-20 05:38:41', 'sdfsdf', 
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `UserName` varchar(30) DEFAULT NULL,
-  `PassWord` varchar(100) DEFAULT NULL,
-  `Sex` int(11) DEFAULT NULL,
-  `UserType` int(11) DEFAULT NULL,
-  `CreateDate` varchar(50) DEFAULT NULL,
-  `No` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `ID` int(11) NOT NULL auto_increment,
+  `UserName` varchar(30) default NULL,
+  `PassWord` varchar(100) default NULL,
+  `Sex` int(11) default NULL,
+  `UserType` int(11) default NULL,
+  `CreateDate` varchar(50) default NULL,
+  `No` varchar(20) default NULL,
+  PRIMARY KEY  (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
