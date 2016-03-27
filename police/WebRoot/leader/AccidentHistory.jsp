@@ -10,13 +10,13 @@
 <html>
 <head>
 <%@ include file="../common/head.jsp"%>
-<title>事故信息</title>
+<title>查看路段历史</title>
 
 </head>
 
 <body>
 	<nav class="breadcrumb"> <i class="Hui-iconfont">&#xe67f;</i> 首页
-	<span class="c-gray en">&gt;</span>事故信息 <a
+	<span class="c-gray en">&gt;</span>查看路段历史 <a
 		class="btn btn-success radius r mr-20"
 		style="line-height: 1.6em; margin-top: 3px" href="#"
 		onclick="aupdate();" title="刷新"> <i class="Hui-iconfont">&#xe68f;</i>
@@ -25,26 +25,17 @@
 
 		<form id="searchform">
 			<div class="text-c">
-				<input type="text" class="input-text" style="width: 250px"
-					placeholder="事故编号" id="id" name="id">
+				<input type="text"
+					class="input-text" style="width: 250px" placeholder="路段" id="accidentSite"
+					name="accidentSite">
 					
-				日期范围： <input type="text"
-					onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}',dateFmt:'yyyy-MM-dd HH:mm:ss'})"
-					id="datemin" name="createDate" class="input-text Wdate"
-					style="width: 170px;"> - <input type="text"
-					onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd HH:mm:ss'})"
-					id="datemax" name="endDate" class="input-text Wdate"
-					style="width: 170px;"> <input type="text"
-					class="input-text" style="width: 250px" placeholder="路段"
-					id="accidentSite" name="accidentSite">
-
 				<button onclick="search();" type="button"
 					class="btn btn-success radius" id="Button1" name="">
 					<i class="Hui-iconfont">&#xe665;</i> 搜索
 				</button>
 			</div>
 		</form>
-
+		
 
 
 
@@ -54,15 +45,14 @@
 				id="datatable">
 				<thead>
 					<tr class="text-c">
-						<th width="8%">事故编号</th>
 						<th width="8%">姓名</th>
-						<th width="5%">性别</th>
+						<th width="10%">性别</th>
 						<th width="10%">手机号码</th>
-
+						
 						<th width="10%">交通方式</th>
 						<th width="20%">事故地点</th>
-						<th width="15%">事故日期</th>
-						
+						<th width="20%">事故日期</th>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -78,7 +68,8 @@
 <script type="text/javascript">
 	var table;
 	$(function() {
-		table = $('#datatable').dataTable(
+		table = $('#datatable')
+				.dataTable(
 						{
 							"iDisplayLength" : 5, //每页显示10条数据
 							"bFilter" : false,
@@ -88,9 +79,6 @@
 							"bLengthChange" : false,
 							"bServerSide" : true,
 							"aoColumns" : [
-									{
-										"mData" : "id"
-									},
 									{
 										"mData" : "name"
 									},
@@ -116,7 +104,8 @@
 									},
 									{
 										"mData" : "createDate"
-									}
+									},
+
 									
 									],
 
@@ -135,12 +124,9 @@
 
 	function fnServerData(sSource, aoData, fnCallback) {
 
-		var data  = $("#searchform").serializeObject();
-		if(data.id==""){
-			data.id = 0;
-		}
+		var data = {};
 		data["act"] = "list";
-		data["data"] = $.toJSON(data);
+		data["data"] = $.toJSON($("#searchform").serializeObject());
 		data["aoData"] = $.toJSON(aoData);
 		$.ajax({
 			url : sSource,
@@ -160,6 +146,7 @@
 	function search() {
 		table.fnDraw();
 	}
+
 
 	function aupdate() {
 		//table.fnDraw();
