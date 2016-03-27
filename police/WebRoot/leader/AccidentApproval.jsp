@@ -25,9 +25,21 @@
 
 		<form id="searchform">
 			<div class="text-c">
-				<input type="text" class="input-text" style="width: 250px"
-					placeholder="路段" id="accidentSite" name="accidentSite">
-
+				<span class="select-box inline">
+					<select name="status" class="select" id="status">
+						<option value="0">全部</option>
+						<option value="2">待审批</option>
+						<option value="3">已通过</option>
+						<option value="1">未通过</option>
+					</select>
+				</span>
+				日期范围：
+                <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}',dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="datemin" name="createDate" class="input-text Wdate" style="width: 170px;">
+                    -
+                <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="datemax" name="endDate" class="input-text Wdate" style="width: 170px;">
+                
+					
+				
 				<button onclick="search();" type="button"
 					class="btn btn-success radius" id="Button1" name="">
 					<i class="Hui-iconfont">&#xe665;</i> 搜索
@@ -109,26 +121,28 @@
 										"mData" : "status",
 										"render" : function(data, type, full,
 												meta) {
-											if (data == "-1") {
+											if (data == "1") {
 												return "未通过";
-											} else if (data == "0") {
-												return "未审批";
+											} else if (data == "2") {
+												return "待审批";
 											}
-											return "通过";
+											return "已通过";
 										}
 									},
 									{
 										"mData" : "",
 										"render" : function(data, type, full,
 												meta) {
-											var html = "--";
-											if (full.status == 0) {
+											var html = "";
+											if (full.status == 2) {
 												html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'updateStatus\','
 														+ full.id
-														+ ',1);">通过</a>';
+														+ ',3);">通过</a>';
 												html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'updateStatus\','
 														+ full.id
-														+ ',-1);">不通过</a>';
+														+ ',1);">不通过</a>';
+											}else{
+												html = "--";
 											}
 
 											return html;

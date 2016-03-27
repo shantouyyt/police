@@ -119,12 +119,12 @@
 									{
 										"mData" : "status",
 										"render" : function(data, type, full,meta) {
-											if (data == "-1") {
+											if (data == "1") {
 												return "未通过";
-											}else if(data == "0"){
-												return "未审批";
+											} else if (data == "2") {
+												return "待审批";
 											}
-											return "通过";
+											return "已通过";
 										}
 									},
 									{
@@ -134,7 +134,7 @@
 											html = 	 '<a data-title="查看事故登记表" _href="AccidentInfo.jsp?id='
 											html +=  	full.id
 											html +=  '" onclick="Hui_admin_tab(this)" href="javascript:;">查看</a>';
-											if(full.status=="0"){
+											if(full.status=="2"){
 												//未审批
 												html += '&nbsp;&nbsp;<a data-title="修改事故登记表" _href="AccidentAdd.jsp?id='+ full.id + '" onclick="Hui_admin_tab(this)" href="javascript:;" >修改</a>';
 											}

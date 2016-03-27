@@ -50,6 +50,9 @@ public class AccidentDal {
 		if (info.getId() > 0) {
 			sb.append(" and ID =").append(info.getId()).append("");
 		}
+		if(info.getStatus() > 0){
+			sb.append(" and Status =").append(info.getStatus()).append("");
+		}
 		
 		if (info.getUserID() > 0) {
 			sb.append(" and UserID =").append(info.getUserID()).append("");

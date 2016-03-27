@@ -28,7 +28,7 @@ public class AccidentService {
 			return Result.Fail("内容不能为空");
 		}
 		info.setCreateDate(StringHelper.GetCurrentDate());
-		info.setStatus(0);
+		info.setStatus(2);
 
 		int Count = dal.Insert(info);
 		if (Count == 0) {
