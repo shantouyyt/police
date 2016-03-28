@@ -53,7 +53,11 @@ public class AccidentDal {
 		if(info.getStatus() > 0){
 			sb.append(" and Accident.Status =").append(info.getStatus()).append("");
 		}
-		if(info.getApprovalstatus() > 0){
+		if(info.getApprovalstatus()==2){
+			//待审批
+			sb.append(" and accidentapproval.Status is null ");
+		}
+		else if(info.getApprovalstatus() > 0){
 			sb.append(" and accidentapproval.Status =").append(info.getApprovalstatus()).append("");
 		}
 		

@@ -126,31 +126,33 @@ var id = getUrlVar("id");
 					alert("操作失败");
 				}
 			});
-			//查询审批表		
-			data["act"] = "approvalget";
-			data["data"] = id;
-			$.ajax({
-				url : '${pageContext.request.contextPath}/servlet/AccidentServlet',
-				data : data,
-				type : 'post',
-				cache : false,
-				dataType : 'json',
-				success : function(r) {
-					if (r.statusID > 0) {
-						var obj = JSON.parse(r.message);
-						$("#remark").val(obj.remark);
-						if(obj.status!=2){
-							$("#remark").attr("readonly","readonly");
-							$("#ok").hide();
+
+				//查询审批表		
+				data["act"] = "approvalget";
+				data["data"] = id;
+				$.ajax({
+					url : '${pageContext.request.contextPath}/servlet/AccidentServlet',
+					data : data,
+					type : 'post',
+					cache : false,
+					dataType : 'json',
+					success : function(r) {
+						if (r.statusID > 0) {
+							var obj = JSON.parse(r.message);
+							$("#remark").val(obj.remark);
+							if(obj.status!=2){
+								$("#remark").attr("readonly","readonly");
+								$("#ok").hide();
+							}
+						} else {
+							//alert(r.message);
 						}
-					} else {
-						alert(r.message);
+					},
+					error : function() {
+						alert("操作失败");
 					}
-				},
-				error : function() {
-					alert("操作失败");
-				}
-			});
+				});
+			
 		}
 	});
 	

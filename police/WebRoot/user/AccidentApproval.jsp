@@ -123,23 +123,25 @@
 									},
 									{
 										"mData" : "approvalstatus",
-										"render" : function(data, type, full,
-												meta) {
+										"render" : function(data, type, full,meta) {
+												
 											if (data == "1") {
 												return "未通过";
-											} else if (data == "2") {
-												return "待审批";
+											} else if (data == "3") {
+												return "已通过";
 											}
-											return "已通过";
+											return "待审批 ";
 										}
 									},
 									{
 										"mData" : "",
 										"render" : function(data, type, full,meta) {
 											var html = "";
-											if(full.status=="3"){
+											if(full.approvalstatus=="3" || full.approvalstatus=="1"){
 												//已审批
-												html += '&nbsp;&nbsp;<a data-title="填写审批" _href="AccidentApprovalAdd.jsp?id='+ full.id + '" onclick="Hui_admin_tab(this)" href="javascript:;" >填写审批</a>';
+												html += '&nbsp;&nbsp;<a data-title="查看审批" _href="AccidentApprovalAdd.jsp?approval=1&id='+ full.id + '" onclick="Hui_admin_tab(this)" href="javascript:;" >查看</a>';
+											}else{
+												html += '&nbsp;&nbsp;<a data-title="填写审批" _href="AccidentApprovalAdd.jsp?approval=2&id='+ full.id + '" onclick="Hui_admin_tab(this)" href="javascript:;" >填写</a>';
 											}
 													
 											return html;
