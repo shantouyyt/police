@@ -118,7 +118,7 @@
 										"mData" : "createDate"
 									},
 									{
-										"mData" : "status",
+										"mData" : "approvalstatus",
 										"render" : function(data, type, full,
 												meta) {
 											if (data == "1") {
@@ -134,12 +134,12 @@
 										"render" : function(data, type, full,
 												meta) {
 											var html = "";
-											if (full.status == 2) {
-												html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'updateStatus\','
-														+ full.id
+											if (full.approvalstatus == 2) {
+												html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'updateApprovalStatus\','
+														+ full.approvalID
 														+ ',3);">通过</a>';
-												html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'updateStatus\','
-														+ full.id
+												html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'updateApprovalStatus\','
+														+ full.approvalID
 														+ ',1);">不通过</a>';
 											}else{
 												html = "--";

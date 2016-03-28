@@ -81,7 +81,14 @@ public class AccidentInfo {
 	private String sex;
 	private int userID;
 	private int approvalstatus;
+	private int approvalID;
 	
+	public int getApprovalID() {
+		return approvalID;
+	}
+	public void setApprovalID(int approvalID) {
+		this.approvalID = approvalID;
+	}
 	public int getApprovalstatus() {
 		return approvalstatus;
 	}

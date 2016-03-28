@@ -44,7 +44,7 @@ public class AccidentDal {
 	public jqOutInfo<AccidentInfo> List(AccidentInfo info, int iDisplayStart,
 			int iDisplayLength) {
 
-		String sql = "select Accident.*,accidentapproval.status as approvalstatus from Accident left join accidentapproval on accident.id = accidentapproval.AccidentNo  where 1=1 ";
+		String sql = "select Accident.*,accidentapproval.id as approvalID,accidentapproval.status as approvalstatus from Accident left join accidentapproval on accident.id = accidentapproval.AccidentNo  where 1=1 ";
 
 		StringBuilder sb = new StringBuilder();
 		if (info.getId() > 0) {

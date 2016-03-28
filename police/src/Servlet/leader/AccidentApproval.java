@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Model.AccidentApprovalInfo;
 import Model.AccidentInfo;
 import Model.Result;
+import Service.AccidentApprovalService;
 import Service.AccidentService;
 
 import com.google.gson.Gson;
@@ -83,6 +85,11 @@ public class AccidentApproval extends HttpServlet {
 			String data = request.getParameter("data");
 			AccidentInfo bean = gson.fromJson(data, AccidentInfo.class);
 			oret = as.UpdateStatus(bean);
+		}else if ("updateApprovalStatus".equals(act)) {
+			String data = request.getParameter("data");
+			AccidentApprovalInfo bean = gson.fromJson(data, AccidentApprovalInfo.class);
+			AccidentApprovalService aas = new AccidentApprovalService();
+			oret = aas.UpdateStatus(bean);
 		}
 		String json = gson.toJson(oret);
 		out.print(json);

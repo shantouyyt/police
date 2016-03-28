@@ -35,5 +35,13 @@ public class AccidentApprovalService {
 	public AccidentApprovalInfo GetInfoByAccidentNo(String AccidentNo) {
 		return dal.GetInfoByAccidentNo(AccidentNo);
 	}
+	
+	public Result UpdateStatus(AccidentApprovalInfo info) {
+		int ret = dal.UpdateStatus(info.getStatus(), info.getId());
+		if (ret > 0) {
+			return Result.Success("操作成功");
+		}
+		return Result.Fail("操作失败");
+	}
 
 }
