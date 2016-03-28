@@ -134,6 +134,7 @@
 										"render" : function(data, type, full,
 												meta) {
 											var html = "";
+											html += '&nbsp;&nbsp;<a data-title="查看审批" _href="AccidentApprovalAdd.jsp?approval=1&id='+ full.id + '" onclick="Hui_admin_tab(this)" href="javascript:;" >查看</a>';
 											if (full.approvalstatus == 2) {
 												html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'updateApprovalStatus\','
 														+ full.approvalID
@@ -142,7 +143,7 @@
 														+ full.approvalID
 														+ ',1);">不通过</a>';
 											}else{
-												html = "--";
+												//html = "--";
 											}
 
 											return html;
