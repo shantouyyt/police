@@ -73,7 +73,7 @@
 			<div class="row cl">
 				<label class="form-label col-2"><span class="c-red">*</span>审批内容：</label>
 				<div class="formControls col-5">
-					<textarea style="margin: 0px; width: 690px; height: 126px;" 
+					<textarea style="margin: 0px; width: 690px; height: 126px;"  readonly= "true"
 						rows="5" cols="30" id="remark" name="remark"></textarea>
 				</div>
 				<div class="col-4"></div>
@@ -82,10 +82,7 @@
 			<div class="row cl">
 				<div class="col-10 col-offset-2">
 					
-					<button id="ok" onclick="btn_Opt();" class="btn btn-primary radius"
-						type="button">
-						<i class="Hui-iconfont">&#xe632;</i> 保存
-					</button>
+					
 
 					<button onclick="removeIframe();" class="btn btn-default radius"
 						type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
@@ -140,10 +137,7 @@ var id = getUrlVar("id");
 						if (r.statusID > 0) {
 							var obj = JSON.parse(r.message);
 							$("#remark").val(obj.remark);
-							if(obj.status!=2){
-								$("#remark").attr("readonly","readonly");
-								$("#ok").hide();
-							}
+							
 						} else {
 							//alert(r.message);
 						}
