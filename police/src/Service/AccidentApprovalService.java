@@ -5,6 +5,7 @@ import Model.AccidentApprovalInfo;
 import Model.AccidentInfo;
 import Model.Result;
 import Utils.StringHelper;
+import Utils.JqTable.jqOutInfo;
 
 public class AccidentApprovalService {
 
@@ -42,6 +43,13 @@ public class AccidentApprovalService {
 			return Result.Success("操作成功");
 		}
 		return Result.Fail("操作失败");
+	}
+	public jqOutInfo<AccidentApprovalInfo> List(AccidentApprovalInfo info, int iDisplayStart,
+			int iDisplayLength) {
+
+		
+
+		return dal.List(info, iDisplayStart, iDisplayLength);
 	}
 
 }

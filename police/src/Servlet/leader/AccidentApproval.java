@@ -13,6 +13,9 @@ import Model.AccidentInfo;
 import Model.Result;
 import Service.AccidentApprovalService;
 import Service.AccidentService;
+import Utils.WebUtils;
+import Utils.JqTable.jqOutInfo;
+import Utils.JqTable.jqProcessInfo;
 
 import com.google.gson.Gson;
 
@@ -90,7 +93,23 @@ public class AccidentApproval extends HttpServlet {
 			AccidentApprovalInfo bean = gson.fromJson(data, AccidentApprovalInfo.class);
 			AccidentApprovalService aas = new AccidentApprovalService();
 			oret = aas.UpdateStatus(bean);
-		}
+		}else if ("list".equals(act)) {
+			// 查询列表
+			jqProcessInfo jpi = WebUtils.GetJqProcessInfo(request);
+
+			String data = request.getParameter("data");
+			AccidentApprovalInfo bean = gson.fromJson(data, AccidentApprovalInfo.class);
+			AccidentApprovalService aas = new AccidentApprovalService();
+			jqOutInfo<AccidentApprovalInfo> oinfo = aas.List(bean,
+					jpi.getiDisplayStart(), jpi.getiDisplayLength());
+
+			oinfo.setsEcho(jpi.getsEcho());
+			// 输出
+			out.print(oinfo.toString());
+			out.flush();
+			out.close();
+			return;
+		} 
 		String json = gson.toJson(oret);
 		out.print(json);
 

@@ -56,13 +56,9 @@
 				id="datatable">
 				<thead>
 					<tr class="text-c">
-						<th width="8%">姓名</th>
-						<th width="10%">性别</th>
-						<th width="10%">手机号码</th>
-
-						<th width="10%">交通方式</th>
-						<th width="20%">事故地点</th>
-						<th width="20%">事故日期</th>
+						<th width="8%">事故编号</th>
+						<th width="10%">审批内容</th>
+						<th width="20%">日期</th>
 						<th width="10%">状态</th>
 						<th width="20%">操作</th>
 					</tr>
@@ -86,39 +82,27 @@
 							"iDisplayLength" : 5, //每页显示10条数据
 							"bFilter" : false,
 							"bProcessing" : true,
-							"sAjaxSource" : "${pageContext.request.contextPath}/servlet/AccidentServlet",
+							"sAjaxSource" : "${pageContext.request.contextPath}/servlet/AccidentApproval",
 							"bSort" : false,
 							"bLengthChange" : false,
 							"bServerSide" : true,
 							"aoColumns" : [
 									{
-										"mData" : "name"
+										"mData" : "accidentNo"
 									},
 									{
-										"mData" : "sex",
-										"render" : function(data, type, full,
-												meta) {
-											if (data == "1") {
-												return "男";
-											}
-											return "女";
+										"mData" : "remark",
+										"render" : function(data, type, full,meta) {
+											
+											return data;
 										}
 									},
-									{
-										"mData" : "tel"
-									},
 
-									{
-										"mData" : "trafficMode"
-									},
-									{
-										"mData" : "accidentSite"
-									},
 									{
 										"mData" : "createDate"
 									},
 									{
-										"mData" : "approvalstatus",
+										"mData" : "status",
 										"render" : function(data, type, full,
 												meta) {
 											if (data == "1") {
@@ -135,12 +119,12 @@
 												meta) {
 											var html = "";
 											html += '&nbsp;&nbsp;<a data-title="查看审批" _href="AccidentApprovalAdd.jsp?approval=1&id='+ full.id + '" onclick="Hui_admin_tab(this)" href="javascript:;" >查看</a>';
-											if (full.approvalstatus == 2) {
+											if (full.status == 2) {
 												html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'updateApprovalStatus\','
-														+ full.approvalID
+														+ full.id
 														+ ',3);">通过</a>';
 												html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'updateApprovalStatus\','
-														+ full.approvalID
+														+ full.id
 														+ ',1);">不通过</a>';
 											}else{
 												//html = "--";
