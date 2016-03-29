@@ -157,6 +157,8 @@ public class AccidentServlet extends HttpServlet {
 			String data = request.getParameter("data");
 			AccidentApprovalInfo bean = gson.fromJson(data,
 					AccidentApprovalInfo.class);
+			
+			bean.setUserID(sessionInfo.getId());
 			AccidentApprovalService aas = new AccidentApprovalService();
 			oret = aas.Insert(bean);
 		} else if ("approvalget".equals(act)) {

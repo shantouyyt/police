@@ -10,8 +10,8 @@ import Utils.JqTable.jqOutInfo;
 public class AccidentApprovalDal {
 
 	public int Insert(AccidentApprovalInfo info) {
-		String sql = "insert into AccidentApproval(AccidentNo,Remark,Status,CreateDate) values(?,?,?,?)";
-		Object[] para = new Object[] { info.getAccidentNo(), info.getRemark(),
+		String sql = "insert into AccidentApproval(UserID,AccidentNo,Remark,Status,CreateDate) values(?,?,?,?,?)";
+		Object[] para = new Object[] {info.getUserID(), info.getAccidentNo(), info.getRemark(),
 				info.getStatus(), info.getCreateDate() };
 		return JDBCJNDI.update(sql, para, false);
 	}
