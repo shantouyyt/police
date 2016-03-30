@@ -107,7 +107,7 @@
 												meta) {
 											var html = "";
 											html += '&nbsp;&nbsp;<a data-title="查看审批" _href="AccidentApprovalAdd.jsp?approval=1&id='+ full.accidentNo + '" onclick="Hui_admin_tab(this)" href="javascript:;" >查看</a>';
-											html += '&nbsp;&nbsp;<a data-title="查看审批" _href="AccidentResponseAdd.jsp?approval=1&id='+ full.accidentNo + '" onclick="Hui_admin_tab(this)" href="javascript:;" >定责</a>';
+											html += '&nbsp;&nbsp;<a data-title="定责" _href="AccidentResponseAdd.jsp?approval=1&id='+ full.accidentNo + '" onclick="Hui_admin_tab(this)" href="javascript:;" >定责</a>';
 											if (full.status == 2) {
 												html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'updateApprovalStatus\','
 														+ full.id

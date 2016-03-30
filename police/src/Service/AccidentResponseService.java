@@ -1,6 +1,7 @@
 package Service;
 
 import Dal.AccidentResponseDal;
+import Model.AccidentInfo;
 import Model.AccidentResponseInfo;
 import Model.Result;
 import Utils.StringHelper;
@@ -48,6 +49,21 @@ public class AccidentResponseService {
 			int iDisplayStart, int iDisplayLength) {
 
 		return dal.List(info, iDisplayStart, iDisplayLength);
+	}
+	
+	public Result Update(AccidentResponseInfo info) {
+		if (StringHelper.IsStrNull(info.getRemark())) {
+			return Result.Fail("定责内容不能为空");
+		}
+		if (StringHelper.IsStrNull(info.getAccidentNo())) {
+			return Result.Fail("事故编号不能为空");
+		}
+		int ret = dal.Update(info);
+		if (ret > 0) {
+			return Result.Success("修改成功");
+		}
+		return Result.Fail("修改失败");
+
 	}
 
 }

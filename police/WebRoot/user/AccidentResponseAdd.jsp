@@ -29,6 +29,7 @@
 				<div class="col-4"></div>
 			</div>
 			<input type="hidden" id="accidentNo" name="accidentNo" />
+			<input type="hidden" id="id" name="id" />
 			<div class="row cl">
 				<div class="col-10 col-offset-2">
 					
@@ -55,14 +56,42 @@ var id = getUrlVar("id");
 		$("#accidentNo").val(0);
 	}
 	$(function() {
+		var data = {};
+		data["act"] = "get";
+		data["data"] = id;
+		$.ajax({
+			url : '${pageContext.request.contextPath}/servlet/AccidentResponse',
+			data : data,
+			type : 'post',
+			cache : false,
+			dataType : 'json',
+			success : function(r) {
+				if (r.statusID > 0) {
+					var obj = JSON.parse(r.message);
+					$("#remark").val(obj.remark);
+					$("#id").val(obj.id);
+				} else {
+					//alert(r.message);
+					$("#id").val(0);
+				}
+			},
+			error : function() {
+				alert("操作失败");
+			}
+		});
 	});
 	
 	function btn_Opt() {
 		var data = {};
-		data["act"] = "approvaladd";
+		var id = $("#id").val();
+		if(id > 0){
+			data["act"] = "update";
+		}else{
+			data["act"] = "add";
+		}
 		data["data"] = $.toJSON($("#form").serializeObject());
 		$.ajax({
-			url : '${pageContext.request.contextPath}/servlet/AccidentServlet',
+			url : '${pageContext.request.contextPath}/servlet/AccidentResponse',
 			data : data,
 			type : 'post',
 			cache : false,

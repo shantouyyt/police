@@ -63,6 +63,7 @@ public class AccidentApprovalDal {
 		String sql = "select * from AccidentApproval where id=" + id;
 		return JDBCJNDI.queryInfo(AccidentApprovalInfo.class, sql, null);
 	}
+	
 	public AccidentApprovalInfo GetInfoByAccidentNo(String AccidentNo) {
 		String sql = "select * from AccidentApproval where AccidentNo='" + AccidentNo + "'";
 		return JDBCJNDI.queryInfo(AccidentApprovalInfo.class, sql, null);
