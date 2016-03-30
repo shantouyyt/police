@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a _href="AccidentApproval.jsp" data-title="事故审批表" href="javascript:void(0)">事故审批表</a></li>
                 </dl>
                  <dl id="Dl15">
-                    <li><a _href="" data-title="事故定责表" href="javascript:void(0)">事故定责表</a></li>
+                    <li><a _href="AccidentResponse.jsp" data-title="事故定责表" href="javascript:void(0)">事故定责表</a></li>
                 </dl>
                 
                 <dl id="Dl13">
