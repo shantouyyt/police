@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jxl.Workbook;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+
 import Model.UsersInfo;
 import Service.UsersService;
 import Utils.ExportExcel;
@@ -79,12 +83,26 @@ public class ExcelServlet extends HttpServlet {
 		response.setContentType("application/msexcel");// 定义输出类型
 		// 定义输出流，以便打开保存对话框_______________________end
 
+		
+		WritableWorkbook workbook = Workbook.createWorkbook(os);
+		
+		//导出用户信息
 		UsersService us = new UsersService();
 		List<UsersInfo> list = us.queryList();
-
-		String[] Title = { "ID", "用户名", "密码", "性别", "类型","警员编号", "时间" };
-
-		ExportExcel.exportExcel(os,Title, list);
+		String[] Title = { "ID", "用户名", "密码", "性别", "警员编号","类型", "时间" };
+		ExportExcel.exportExcel(workbook,"个人信息",Title, list);
+		
+		ExportExcel.exportExcel(workbook,"个人信息2",Title, list);
+		
+		/** **********将以上缓存中的内容写到EXCEL文件中******** */
+		workbook.write();
+		/** *********关闭文件************* */
+		try {
+			workbook.close();
+		} catch (WriteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		os.flush();
 		os.close();
