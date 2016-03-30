@@ -84,6 +84,13 @@
     <servlet-name>AccidentResponse</servlet-name>
     <servlet-class>Servlet.user.AccidentResponse</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ExcelServlet</servlet-name>
+    <servlet-class>Servlet.system.ExcelServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -123,6 +130,10 @@
   <servlet-mapping>
     <servlet-name>AccidentResponse</servlet-name>
     <url-pattern>/servlet/AccidentResponse</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ExcelServlet</servlet-name>
+    <url-pattern>/servlet/ExcelServlet</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

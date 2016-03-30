@@ -1,6 +1,7 @@
 package Service;
 
 import java.util.Date;
+import java.util.List;
 
 import Dal.UsersDal;
 import Model.InPoliceInfo;
@@ -93,5 +94,9 @@ public class UsersService {
 		}
 		return Result.Fail("修改失败");
 
+	}
+	
+	public List<UsersInfo> queryList(){
+		return dal.queryList();
 	}
 }

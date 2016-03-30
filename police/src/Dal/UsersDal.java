@@ -114,4 +114,12 @@ public class UsersDal {
 				info.getPassWord(),  info.getId() };
 		return JDBCJNDI.update(sql, para, false);
 	}
+	
+	public List<UsersInfo> queryList(){
+		String sql = "select * from users";
+		return JDBCJNDI.queryList(UsersInfo.class, sql, null);
+	}
+	
+	
+	
 }
