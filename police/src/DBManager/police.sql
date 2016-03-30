@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2016-03-29 17:39:28
+Date: 2016-03-30 17:40:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,11 +32,12 @@ CREATE TABLE `accident` (
   `UserID` int(11) DEFAULT NULL,
   `AccidentNo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of accident
 -- ----------------------------
+INSERT INTO `accident` VALUES ('2', '摩托', '汕头', '2016-03-30 09:24:32', '事故内容', '3', '张三', '18600', '1', '2', null);
 
 -- ----------------------------
 -- Table structure for accidentapproval
@@ -56,6 +57,7 @@ CREATE TABLE `accidentapproval` (
 -- ----------------------------
 -- Records of accidentapproval
 -- ----------------------------
+INSERT INTO `accidentapproval` VALUES ('1', '2', '2', '审批内容', '3', null, '2016-03-30 09:25:22');
 
 -- ----------------------------
 -- Table structure for accidentresponse
@@ -69,11 +71,12 @@ CREATE TABLE `accidentresponse` (
   `Status` int(11) DEFAULT NULL,
   `CreateDate` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of accidentresponse
 -- ----------------------------
+INSERT INTO `accidentresponse` VALUES ('1', '2', '2', '定责内容xxx', '2', '2016-03-30 09:44:32');
 
 -- ----------------------------
 -- Table structure for driver
@@ -104,6 +107,33 @@ INSERT INTO `driver` VALUES ('6', 'sdfs', '0', 'sdfsdf', 'sdfsdf', '2016-03-24 1
 INSERT INTO `driver` VALUES ('7', 'sdfs', '1', 'sdf', 'dfsdf', '2016-03-23 10:31:11', 'sdf', '2016-03-26 10:31:16', 'sdfsdfsdf');
 
 -- ----------------------------
+-- Table structure for evidence
+-- ----------------------------
+DROP TABLE IF EXISTS `evidence`;
+CREATE TABLE `evidence` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `AccidentNO` varchar(20) DEFAULT NULL,
+  `SGDD` varchar(100) DEFAULT NULL,
+  `TQ` varchar(50) DEFAULT NULL,
+  `QSRS` varchar(20) DEFAULT NULL,
+  `CreateDate` varchar(50) DEFAULT NULL,
+  `SZRS` varchar(10) DEFAULT NULL,
+  `ZJJJSS` varchar(50) DEFAULT NULL,
+  `YJ1` varchar(400) DEFAULT NULL,
+  `YJ2` varchar(400) DEFAULT NULL,
+  `SWRS` varchar(10) DEFAULT NULL,
+  `DLKD` varchar(20) DEFAULT NULL,
+  `ZSRS` varchar(10) DEFAULT NULL,
+  `JTFS` varchar(20) DEFAULT NULL,
+  `BZ` varchar(400) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of evidence
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for inpolice
 -- ----------------------------
 DROP TABLE IF EXISTS `inpolice`;
@@ -114,22 +144,24 @@ CREATE TABLE `inpolice` (
   `CreateDate` varchar(50) DEFAULT NULL,
   `Remark` varchar(400) DEFAULT NULL,
   `Tel` varchar(20) DEFAULT NULL,
+  `SGDD` varchar(100) DEFAULT NULL,
+  `SWQK` varchar(400) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of inpolice
 -- ----------------------------
-INSERT INTO `inpolice` VALUES ('2', '小李', '1', '2016-03-20 09:38:14', '喝酒', '1111111');
-INSERT INTO `inpolice` VALUES ('3', '中文', '1', '1', '1收到', '1');
-INSERT INTO `inpolice` VALUES ('5', '名字', '0', '2016-03-20 04:58:05', '备注vvv', '电话');
-INSERT INTO `inpolice` VALUES ('6', 'fff', '0', '2016-03-20 05:00:01', 'eeeeeeeeee', 'eeeeee');
-INSERT INTO `inpolice` VALUES ('7', 'sdf', '1', '2016-03-20 05:05:38', 'sdfds', 'sdf');
-INSERT INTO `inpolice` VALUES ('8', 'aasd', '1', '2016-03-20 05:05:44', 'dasdasd', 'asdas');
-INSERT INTO `inpolice` VALUES ('9', 'sdfs', '1', '2016-03-20 05:05:49', 'sdfsdfds', 'dfdsf');
-INSERT INTO `inpolice` VALUES ('10', 'sdfsdf', '1', '2016-03-20 05:05:54', 'sdfsd', 'fsdfsdfsd');
-INSERT INTO `inpolice` VALUES ('11', 'sfsdfs', '1', '2016-03-20 05:06:01', 'sdfsdf', 'dfsdf');
-INSERT INTO `inpolice` VALUES ('30', 'f', '1', '2016-03-20 05:38:41', 'sdfsdf', 'sdf');
+INSERT INTO `inpolice` VALUES ('2', '小李', '1', '2016-03-20 09:38:14', '喝酒', '1111111', null, null);
+INSERT INTO `inpolice` VALUES ('3', '中文', '1', '1', '1收到', '1', null, null);
+INSERT INTO `inpolice` VALUES ('5', '名字', '0', '2016-03-20 04:58:05', '备注vvv', '电话', null, null);
+INSERT INTO `inpolice` VALUES ('6', 'fff', '0', '2016-03-20 05:00:01', 'eeeeeeeeee', 'eeeeee', null, null);
+INSERT INTO `inpolice` VALUES ('7', 'sdf', '1', '2016-03-20 05:05:38', 'sdfds', 'sdf', null, null);
+INSERT INTO `inpolice` VALUES ('8', 'aasd', '1', '2016-03-20 05:05:44', 'dasdasd', 'asdas', null, null);
+INSERT INTO `inpolice` VALUES ('9', 'sdfs', '1', '2016-03-20 05:05:49', 'sdfsdfds', 'dfdsf', null, null);
+INSERT INTO `inpolice` VALUES ('10', 'sdfsdf', '1', '2016-03-20 05:05:54', 'sdfsd', 'fsdfsdfsd', null, null);
+INSERT INTO `inpolice` VALUES ('11', 'sfsdfs', '1', '2016-03-20 05:06:01', 'sdfsdf', 'dfsdf', null, null);
+INSERT INTO `inpolice` VALUES ('30', 'f', '1', '2016-03-20 05:38:41', 'sdfsdf', 'sdf', null, null);
 
 -- ----------------------------
 -- Table structure for users
@@ -143,12 +175,18 @@ CREATE TABLE `users` (
   `UserType` int(11) DEFAULT NULL,
   `CreateDate` varchar(50) DEFAULT NULL,
   `No` varchar(20) DEFAULT NULL,
+  `WHCD` varchar(50) DEFAULT NULL,
+  `CSRQ` varchar(50) DEFAULT NULL,
+  `JX` varchar(50) DEFAULT NULL,
+  `ZW` varchar(400) DEFAULT NULL,
+  `ZGZH` varchar(50) DEFAULT NULL,
+  `CJNX` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'admin', '123123', '1', '3', '2016-03-17 18:40:28', null);
-INSERT INTO `users` VALUES ('2', 'jy001', '123123', '1', '1', '2016-03-21 09:29:28', '1000002');
-INSERT INTO `users` VALUES ('3', 'ld123', '123123', '1', '2', '2016-03-22 08:58:02', '2000003');
+INSERT INTO `users` VALUES ('1', 'admin', '123123', '1', '3', '2016-03-17 18:40:28', null, null, null, null, null, null, null);
+INSERT INTO `users` VALUES ('2', 'jy001', '123123', '1', '1', '2016-03-21 09:29:28', '1000002', null, null, null, null, null, null);
+INSERT INTO `users` VALUES ('3', 'ld123', '123123', '1', '2', '2016-03-22 08:58:02', '2000003', null, null, null, null, null, null);
