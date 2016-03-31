@@ -11,16 +11,16 @@ public class InPoliceDal {
 
 	public int Insert(InPoliceInfo info) {
 
-		String sql = "insert into InPolice(Name,Sex,CreateDate,Remark,Tel) values(?,?,?,?,?)";
+		String sql = "insert into InPolice(Name,Sex,CreateDate,Remark,Tel,SGDD,SWQK) values(?,?,?,?,?,?,?)";
 		Object[] para = new Object[] { info.getName(), info.getSex(),
-				info.getCreateDate(), info.getRemark(), info.getTel() };
+				info.getCreateDate(), info.getRemark(), info.getTel(),info.getsGDD(),info.getsWQK() };
 		return JDBCJNDI.update(sql, para, false);
 	}
 
 	public int Update(InPoliceInfo info) {
-		String sql = "update InPolice set Name=?,Sex=?,Remark=?,Tel=? where id=?";
+		String sql = "update InPolice set Name=?,Sex=?,Remark=?,Tel=?,SGDD=?,SWQK=? where id=?";
 		Object[] para = new Object[] { info.getName(), info.getSex(),
-				info.getRemark(), info.getTel(), info.getId() };
+				info.getRemark(), info.getTel(), info.getsGDD(),info.getsWQK(), info.getId() };
 		return JDBCJNDI.update(sql, para, false);
 	}
 

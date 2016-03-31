@@ -124,6 +124,7 @@ public class JDBCJNDI {
 			conn = JDBCJNDI.getConnection();
 
 			StringBuilder sb = new StringBuilder();
+			sql = sql + " ORDER BY id DESC ";
 			sb.append(sql).append(" limit ").append(iDisplayStart).append(",")
 					.append(iDisplayLength);
 

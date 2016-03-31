@@ -7,6 +7,23 @@ public class InPoliceInfo {
 	private int sex;
 	private String createDate;
 	private String endDate;
+	
+	
+	public String getsGDD() {
+		return sGDD;
+	}
+	public void setsGDD(String sGDD) {
+		this.sGDD = sGDD;
+	}
+	public String getsWQK() {
+		return sWQK;
+	}
+	public void setsWQK(String sWQK) {
+		this.sWQK = sWQK;
+	}
+	private String sGDD;
+	private String sWQK;
+	
 	public String getEndDate() {
 		return endDate;
 	}

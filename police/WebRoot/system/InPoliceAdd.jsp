@@ -47,6 +47,22 @@
 				<div class="col-4"></div>
 			</div>
 			<div class="row cl">
+				<label class="form-label col-2"><span class="c-red">*</span>事故地点：</label>
+				<div class="formControls col-5">
+					<input maxlength="20" type="text" class="input-text" value=""
+						placeholder="" id="sGDD" name="sGDD">
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-2">死亡情况：</label>
+				<div class="formControls col-5">
+					<textarea style="margin: 0px; width: 690px; height: 126px;"
+						rows="5" cols="30" id="sWQK" name="sWQK"></textarea>
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row cl">
 				<label class="form-label col-2">备注：</label>
 				<div class="formControls col-5">
 					<textarea style="margin: 0px; width: 690px; height: 126px;"
