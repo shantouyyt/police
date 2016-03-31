@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2016-03-30 17:40:24
+Date: 2016-03-31 17:37:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -147,7 +147,7 @@ CREATE TABLE `inpolice` (
   `SGDD` varchar(100) DEFAULT NULL,
   `SWQK` varchar(400) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of inpolice
@@ -162,6 +162,7 @@ INSERT INTO `inpolice` VALUES ('9', 'sdfs', '1', '2016-03-20 05:05:49', 'sdfsdfd
 INSERT INTO `inpolice` VALUES ('10', 'sdfsdf', '1', '2016-03-20 05:05:54', 'sdfsd', 'fsdfsdfsd', null, null);
 INSERT INTO `inpolice` VALUES ('11', 'sfsdfs', '1', '2016-03-20 05:06:01', 'sdfsdf', 'dfsdf', null, null);
 INSERT INTO `inpolice` VALUES ('30', 'f', '1', '2016-03-20 05:38:41', 'sdfsdf', 'sdf', null, null);
+INSERT INTO `inpolice` VALUES ('31', '报警人姓名', '1', '2016-03-31 03:48:40', '备注xxxx', '报警人电话', '事故地点', '死亡情况');
 
 -- ----------------------------
 -- Table structure for users
@@ -188,5 +189,5 @@ CREATE TABLE `users` (
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES ('1', 'admin', '123123', '1', '3', '2016-03-17 18:40:28', null, null, null, null, null, null, null);
-INSERT INTO `users` VALUES ('2', 'jy001', '123123', '1', '1', '2016-03-21 09:29:28', '1000002', null, null, null, null, null, null);
+INSERT INTO `users` VALUES ('2', 'jy001', '123123', '1', '1', '2016-03-21 09:29:28', '1000002', '小学', '2016-03-31 17:28:38', '警员', '职务', '资格证号', '10');
 INSERT INTO `users` VALUES ('3', 'ld123', '123123', '1', '2', '2016-03-22 08:58:02', '2000003', null, null, null, null, null, null);
