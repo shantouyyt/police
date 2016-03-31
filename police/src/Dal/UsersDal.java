@@ -104,22 +104,23 @@ public class UsersDal {
 		String sql = "delete from  Users where id=" + id;
 		return JDBCJNDI.update(sql, null, false);
 	}
+
 	public UsersInfo GetInfoByID(int id) {
 		String sql = "select * from Users where id=" + id;
 		return JDBCJNDI.queryInfo(UsersInfo.class, sql, null);
 	}
+
 	public int Update(UsersInfo info) {
-		String sql = "update Users set Sex=?,PassWord=? where id=?";
-		Object[] para = new Object[] {  info.getSex(),
-				info.getPassWord(),  info.getId() };
+		String sql = "update Users set UserName=?,WHCD=?,CSRQ=?,JX=?,ZW=?,ZGZH=?,CJNX=?, Sex=?,PassWord=? where id=?";
+		Object[] para = new Object[] { info.getUserName(), info.getwHCD(),
+				info.getcSRQ(), info.getjX(), info.getzW(), info.getzGZH(),
+				info.getcJNX(), info.getSex(), info.getPassWord(), info.getId() };
 		return JDBCJNDI.update(sql, para, false);
 	}
-	
-	public List<UsersInfo> queryList(){
+
+	public List<UsersInfo> queryList() {
 		String sql = "select * from users";
 		return JDBCJNDI.queryList(UsersInfo.class, sql, null);
 	}
-	
-	
-	
+
 }

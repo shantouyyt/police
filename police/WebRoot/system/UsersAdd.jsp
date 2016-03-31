@@ -18,7 +18,7 @@
 	<div class="pd-20">
 
 		<form action="" method="post" class="form form-horizontal" id="form">
-			<!-- 
+			
 			<div class="row cl">
 				<label class="form-label col-2"><span class="c-red">*</span>用户名：</label>
 				<div class="formControls col-5">
@@ -27,7 +27,7 @@
 				</div>
 				<div class="col-4"></div>
 			</div>
-			-->
+			
 			<div class="row cl">
 				<label class="form-label col-2"><span class="c-red">*</span>密码：</label>
 				<div class="formControls col-5">
@@ -43,6 +43,70 @@
 						<option value="1">男</option>
 						<option value="0">女</option>
 					</select>
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-2">文化程度：</label>
+				<div class="formControls col-5">
+					<select class="select" id="wHCD" name="wHCD">
+						<option value="小学">小学</option>
+						<option value="初中">初中</option>
+						<option value="高中">高中</option>
+						<option value="中职">中职</option>
+						<option value="专科">专科</option>
+						<option value="本科">本科</option>
+						<option value="硕士">硕士</option>
+						<option value="博士">博士</option>
+					</select>
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-2">警衔：</label>
+				<div class="formControls col-5">
+					<select class="select" id="jX" name="jX">
+						<option value="警员">警员</option>
+						<option value="警司">警司</option>
+						<option value="警督">警督</option>
+						<option value="警监">警监</option>
+						<option value="副总警监">副总警监</option>
+						<option value="总警监">总警监</option>
+					</select>
+				</div>
+				<div class="col-4"></div>
+			</div>
+			
+			<div class="row cl">
+				<label class="form-label col-2">出生日期：</label>
+				<div class="formControls col-2">
+					<input name="cSRQ" type="text"
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+						id="cSRQ" class="input-text Wdate">
+				</div>
+			</div>
+			
+			<div class="row cl">
+				<label class="form-label col-2">职务：</label>
+				<div class="formControls col-5">
+					<input maxlength="100" type="text" class="input-text" value=""
+						placeholder="" id="zW" name="zW">
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-2">资格证号：</label>
+				<div class="formControls col-5">
+					<input maxlength="100" type="text" class="input-text" value=""
+						placeholder="" id="zGZH" name="zGZH">
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-2">参警年限：</label>
+				<div class="formControls col-5">
+					<input maxlength="100" type="text" class="input-text" value=""
+						placeholder="" id="cJNX" name="cJNX">
 				</div>
 				<div class="col-4"></div>
 			</div>

@@ -79,9 +79,9 @@ public class UsersService {
 	}
 
 	public Result Update(UsersInfo info) {
-		// if (StringHelper.IsStrNull(info.getUserName())) {
-		// return Result.Fail("用户不能为空");
-		// }
+		 if (StringHelper.IsStrNull(info.getUserName())) {
+		 return Result.Fail("用户不能为空");
+		 }
 		if (StringHelper.IsStrNull(info.getPassWord())) {
 			return Result.Fail("密码不能为空");
 		}
