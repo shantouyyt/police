@@ -2,9 +2,11 @@ package Service;
 
 import Dal.EvidenceDal;
 import Model.AccidentApprovalInfo;
+import Model.AccidentResponseInfo;
 import Model.EvidenceInfo;
 import Model.Result;
 import Utils.StringHelper;
+import Utils.JqTable.jqOutInfo;
 
 public class EvidenceService {
 	private EvidenceDal dal = new EvidenceDal();
@@ -38,6 +40,12 @@ public class EvidenceService {
 	
 	public EvidenceInfo GetInfoByAccidentNo(String AccidentNo) {
 		return dal.GetInfoByAccidentNo(AccidentNo);
+	}
+	
+	public jqOutInfo<EvidenceInfo> List(EvidenceInfo info,
+			int iDisplayStart, int iDisplayLength) {
+
+		return dal.List(info, iDisplayStart, iDisplayLength);
 	}
 
 }

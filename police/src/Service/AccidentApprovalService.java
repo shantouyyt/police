@@ -47,8 +47,6 @@ public class AccidentApprovalService {
 	public jqOutInfo<AccidentApprovalInfo> List(AccidentApprovalInfo info, int iDisplayStart,
 			int iDisplayLength) {
 
-		
-
 		return dal.List(info, iDisplayStart, iDisplayLength);
 	}
 
