@@ -29,36 +29,40 @@ public class EvidenceDal {
 		return JDBCJNDI.queryInfo(EvidenceInfo.class, sql, null);
 	}
 
-	public int Update(DriverInfo info) {
-		String sql = "update Driver set Name=?,Sex=?,Tel=?,License=?,LicenseExpire=?,Address=?,Remark=? where id=?";
-		Object[] para = new Object[] { info.getName(), info.getSex(),
-				info.getTel(), info.getLicense(), info.getLicenseExpire(),
-				info.getAddress(), info.getRemark(), info.getId() };
+	public EvidenceInfo GetInfoByAccidentNo(String AccidentNo) {
+		String sql = "select * from Evidence where AccidentNo='" + AccidentNo
+				+ "'";
+		return JDBCJNDI.queryInfo(EvidenceInfo.class, sql, null);
+	}
+
+	public int Update(EvidenceInfo info) {
+		String sql = "update Evidence set SGDD=?,TQ=?,QSRS=?,CreateDate=?,SZRS=?,ZJJJSS=?,YJ1=?,YJ2=?";
+		sql += ",SWRS=?,DLKD=?,ZSRS=?,JTFS=?,BZ=? where id=?";
+
+		Object[] para = new Object[] { info.getsGDD(), info.gettQ(),
+				info.getqSRS(), info.getCreateDate(), info.getsZRS(),
+				info.getzJJJSS(), info.getyJ1(), info.getyJ2(), info.getsWRS(),
+				info.getdLKD(), info.getzSRS(), info.getjTFS(), info.getbZ(),info.getId() };
 		return JDBCJNDI.update(sql, para, false);
 	}
 
-	public jqOutInfo<DriverInfo> List(DriverInfo info, int iDisplayStart,
+	public jqOutInfo<EvidenceInfo> List(EvidenceInfo info, int iDisplayStart,
 			int iDisplayLength) {
 
-		String sql = "select * from Driver where 1=1 ";
+		String sql = "select * from Evidence where 1=1 ";
 
 		StringBuilder sb = new StringBuilder();
-		if (!StringHelper.IsStrNull(info.getName())) {
-			sb.append(" and Name like '%").append(info.getName()).append("%' ");
+		if (!StringHelper.IsStrNull(info.getsGDD())) {
+			sb.append(" and SGDD like '%").append(info.getsGDD()).append("%' ");
 		}
-		if (!StringHelper.IsStrNull(info.getLicense())) {
-			sb.append(" and License like '%").append(info.getLicense())
-					.append("%' ");
-		}
-
-		String countsql = "select count(1) from Driver where 1=1 ";
+		String countsql = "select count(1) from Evidence where 1=1 ";
 		int count = JDBCJNDI.count(countsql + sb.toString());
 
-		List<DriverInfo> list = JDBCJNDI.findPage(DriverInfo.class,
-				sql + sb.toString(), iDisplayStart, iDisplayLength);
+		List<EvidenceInfo> list = JDBCJNDI.findPage(EvidenceInfo.class, sql
+				+ sb.toString(), iDisplayStart, iDisplayLength);
 
-		jqOutInfo<DriverInfo> joi = new jqOutInfo<DriverInfo>("", count, count,
-				list);
+		jqOutInfo<EvidenceInfo> joi = new jqOutInfo<EvidenceInfo>("", count,
+				count, list);
 		return joi;
 	}
 }
