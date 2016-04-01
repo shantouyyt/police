@@ -4,27 +4,29 @@ import java.util.List;
 
 import DBManager.JDBCJNDI;
 import Model.DriverInfo;
-import Model.InPoliceInfo;
+import Model.EvidenceInfo;
 import Utils.StringHelper;
 import Utils.JqTable.jqOutInfo;
 
 public class EvidenceDal {
-	public int Insert(DriverInfo info) {
-		String sql = "insert into Driver(Name,Sex,Tel,License,LicenseExpire,Address,CreateDate,Remark) values(?,?,?,?,?,?,?,?)";
-		Object[] para = new Object[] { info.getName(), info.getSex(),
-				info.getTel(), info.getLicense(), info.getLicenseExpire(),
-				info.getAddress(), info.getCreateDate(), info.getRemark() };
+	public int Insert(EvidenceInfo info) {
+		String sql = "insert into Evidence(AccidentNO,SGDD,TQ,QSRS,CreateDate,SZRS,ZJJJSS,YJ1,YJ2,SWRS,DLKD,ZSRS,JTFS,BZ) ";
+		sql += " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] para = new Object[] { info.getAccidentNO(), info.getsGDD(),
+				info.gettQ(), info.getqSRS(), info.getCreateDate(),
+				info.getsZRS(), info.getzJJJSS(), info.getyJ1(), info.getyJ2(),
+				info.getsWRS(), info.getdLKD(), info.getzSRS(), info.getbZ() };
 		return JDBCJNDI.update(sql, para, false);
 	}
 
 	public int Delete(int id) {
-		String sql = "delete from  Driver where id=" + id;
+		String sql = "delete from  Evidence where id=" + id;
 		return JDBCJNDI.update(sql, null, false);
 	}
 
-	public DriverInfo GetInfoByID(int id) {
-		String sql = "select * from Driver where id=" + id;
-		return JDBCJNDI.queryInfo(DriverInfo.class, sql, null);
+	public EvidenceInfo GetInfoByID(int id) {
+		String sql = "select * from Evidence where id=" + id;
+		return JDBCJNDI.queryInfo(EvidenceInfo.class, sql, null);
 	}
 
 	public int Update(DriverInfo info) {

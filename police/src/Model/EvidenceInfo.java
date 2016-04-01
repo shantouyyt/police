@@ -87,6 +87,34 @@ public class EvidenceInfo {
 	private String yJ1;
 	private String yJ2;
 	private String sWRS;
+	public String getdLKD() {
+		return dLKD;
+	}
+	public void setdLKD(String dLKD) {
+		this.dLKD = dLKD;
+	}
+	public String getzSRS() {
+		return zSRS;
+	}
+	public void setzSRS(String zSRS) {
+		this.zSRS = zSRS;
+	}
+	public String getjTFS() {
+		return jTFS;
+	}
+	public void setjTFS(String jTFS) {
+		this.jTFS = jTFS;
+	}
+	public String getbZ() {
+		return bZ;
+	}
+	public void setbZ(String bZ) {
+		this.bZ = bZ;
+	}
+	private String dLKD;
+	private String zSRS;
+	private String jTFS;
+	private String bZ;
 	
 	public String toString(){
 		return new Gson().toJson(this);
