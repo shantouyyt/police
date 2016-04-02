@@ -15,7 +15,7 @@ public class EvidenceDal {
 		Object[] para = new Object[] { info.getAccidentNO(), info.getsGDD(),
 				info.gettQ(), info.getqSRS(), info.getCreateDate(),
 				info.getsZRS(), info.getzJJJSS(), info.getyJ1(), info.getyJ2(),
-				info.getsWRS(), info.getdLKD(), info.getzSRS(), info.getbZ() };
+				info.getsWRS(), info.getdLKD(), info.getzSRS(), info.getjTFS(), info.getbZ() };
 		return JDBCJNDI.update(sql, para, false);
 	}
 

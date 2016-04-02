@@ -83,7 +83,7 @@
 				<label class="form-label col-2">事故原因2：</label>
 				<div class="formControls col-5">
 					<input maxlength="20" type="text" class="input-text" value=""
-						placeholder="" id="yJ1" name="yJ1">
+						placeholder="" id="yJ2" name="yJ2">
 				</div>
 				<div class="col-4"></div>
 			</div>
@@ -132,6 +132,7 @@
 				<div class="col-4"></div>
 			</div>
 			<input type="hidden" id="accidentNO" name="accidentNO" />
+			<input type="hidden" id="id" name="id" value="0" />
 			<div class="row cl">
 				<div class="col-10 col-offset-2">
 					<button onclick="btn_Opt();" class="btn btn-primary radius"
@@ -160,11 +161,11 @@
 	$(function() {
 		if (id > 0) {
 			var data = {};
-			data["act"] = "get";
+			data["act"] = "getAccidentNo";
 			data["data"] = id;
 			$
 					.ajax({
-						url : '${pageContext.request.contextPath}/servlet/DriverServlet',
+						url : '${pageContext.request.contextPath}/servlet/EvidenceServlet',
 						data : data,
 						type : 'post',
 						cache : false,
@@ -172,26 +173,21 @@
 						success : function(r) {
 							if (r.statusID > 0) {
 								Json2Form(JSON.parse(r.message));
-							} else {
-								alert(r.message);
 							}
-						},
-						error : function() {
-							alert("操作失败");
 						}
 					});
 		}
 	});
 	function btn_Opt() {
 		var data = {};
-		if (id > 0) {
+		if ($("#id") > 0) {
 			data["act"] = "update";
 		} else {
 			data["act"] = "add";
 		}
 		data["data"] = $.toJSON($("#form").serializeObject());
 		$.ajax({
-			url : '${pageContext.request.contextPath}/servlet/DriverServlet',
+			url : '${pageContext.request.contextPath}/servlet/EvidenceServlet',
 			data : data,
 			type : 'post',
 			cache : false,
