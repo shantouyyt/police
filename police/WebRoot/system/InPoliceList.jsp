@@ -46,11 +46,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <tr class="text-c">
                         <th width="8%">事故编号</th>
                         <th width="8%">报警人</th>
-                        <th width="10%">性别</th>
+                        <th width="5%">性别</th>
                         <th width="15%">报警日期</th>
                         <th width="20%">备注</th>
                         <th width="10%">手机号码</th>
-                        <th width="20%">操作</th>
+                        <th width="25%">操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,6 +95,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         					html = '<a data-title="添加接警" _href="InPoliceAdd.jsp?id='+full.id+'" onclick="Hui_admin_tab(this)" href="javascript:;" ">修改</a>';
                             html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'delete\',' + full.id + ',this);">删除</a>';
                             html += '&nbsp;&nbsp;<a data-title="添加现场证据" _href="EvidentAdd.jsp?id='+full.id+'" onclick="Hui_admin_tab(this)" href="javascript:;" ">添加现场证据</a>';
+                            html += '&nbsp;&nbsp;<a data-title="出警" _href="OutPoliceAdd.jsp?id='+full.id+'" onclick="Hui_admin_tab(this)" href="javascript:;" ">出警</a>';
+                            
                             return html;
                         }
                     },
