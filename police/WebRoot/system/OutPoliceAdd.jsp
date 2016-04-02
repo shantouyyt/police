@@ -84,6 +84,32 @@
 	}else{
 		$("#id").val(0);
 	}
+	Init();
+	function Init() {
+		var data = {};
+		data["act"] = "list";
+		data["InPoliceID"] = id;
+
+		$.ajax({
+			url : '${pageContext.request.contextPath}/servlet/OutPoliceServlet',
+			data : data,
+			type : 'post',
+			cache : false,
+			dataType : 'json',
+			success : function(r) {
+				var users = r.aaData;
+				for(var i=0;i<users.length;i++){
+					var user = users[i];
+					operation("",user.userID,user.userName);
+				}
+			},
+			error : function() {
+				alert("操作失败");
+			}
+		});
+	}
+	
+	
 	
 	var table;
         $(function () {

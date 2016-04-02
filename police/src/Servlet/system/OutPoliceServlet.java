@@ -8,10 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Model.InPoliceInfo;
 import Model.OutPoliceInfo;
 import Model.Result;
 import Service.OutPoliceService;
 import Utils.StringHelper;
+import Utils.WebUtils;
+import Utils.JqTable.jqOutInfo;
+import Utils.JqTable.jqProcessInfo;
 
 import com.google.gson.Gson;
 
@@ -95,6 +99,24 @@ public class OutPoliceServlet extends HttpServlet {
 				oret = os.Insert(info);
 			}
 
+		}else if ("list".equals(act)) {
+			// 查询列表
+			jqProcessInfo jpi = WebUtils.GetJqProcessInfo(request);
+
+			String InPoliceID = request.getParameter("InPoliceID");
+			
+			OutPoliceInfo bean = new OutPoliceInfo();
+			bean.setInPoliceID(StringHelper.Str2Int(InPoliceID));
+
+			jqOutInfo<OutPoliceInfo> oinfo = os.List(bean,
+					jpi.getiDisplayStart(), jpi.getiDisplayLength());
+
+			oinfo.setsEcho(jpi.getsEcho());
+			// 输出
+			out.print(oinfo.toString());
+			out.flush();
+			out.close();
+			return;
 		}
 		String json = gson.toJson(oret);
 		out.print(json);

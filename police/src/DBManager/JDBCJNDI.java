@@ -124,9 +124,12 @@ public class JDBCJNDI {
 			conn = JDBCJNDI.getConnection();
 
 			StringBuilder sb = new StringBuilder();
-			sql = sql + " ORDER BY id DESC ";
-			sb.append(sql).append(" limit ").append(iDisplayStart).append(",")
-					.append(iDisplayLength);
+			sb.append(sql).append(" ORDER BY id DESC ");
+
+			// 分页
+			if (iDisplayLength > 0) {
+				sb.append(" limit ").append(iDisplayStart).append(",").append(iDisplayLength);
+			}
 
 			List<T> retInfo = qr.query(conn, sb.toString(),
 					new BeanListHandler<T>(t));

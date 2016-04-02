@@ -21,7 +21,7 @@ public class OutPoliceDal {
 	public jqOutInfo<OutPoliceInfo> List(OutPoliceInfo info, int iDisplayStart,
 			int iDisplayLength) {
 
-		String sql = "select * from OutPolice where 1=1 ";
+		String sql = "select OutPolice.*,users.userName from OutPolice inner join users on OutPolice.UserID=users.ID where 1=1 ";
 
 		StringBuilder sb = new StringBuilder();
 
