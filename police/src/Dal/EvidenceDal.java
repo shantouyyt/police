@@ -55,6 +55,14 @@ public class EvidenceDal {
 		if (!StringHelper.IsStrNull(info.getsGDD())) {
 			sb.append(" and SGDD like '%").append(info.getsGDD()).append("%' ");
 		}
+		if (!StringHelper.IsStrNull(info.getCreateDate())) {
+			sb.append(" and CreateDate >='").append(info.getCreateDate())
+					.append("' ");
+		}
+		if (!StringHelper.IsStrNull(info.getEndDate())) {
+			sb.append(" and CreateDate <='").append(info.getEndDate())
+					.append("' ");
+		}
 		String countsql = "select count(1) from Evidence where 1=1 ";
 		int count = JDBCJNDI.count(countsql + sb.toString());
 

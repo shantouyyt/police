@@ -13,6 +13,9 @@ import Model.InPoliceInfo;
 import Model.Result;
 import Service.EvidenceService;
 import Utils.StringHelper;
+import Utils.WebUtils;
+import Utils.JqTable.jqOutInfo;
+import Utils.JqTable.jqProcessInfo;
 
 import com.google.gson.Gson;
 
@@ -115,6 +118,22 @@ public class EvidenceServlet extends HttpServlet {
 			// 删除
 			String data = request.getParameter("data");
 			oret = es.Delete(StringHelper.Str2Int(data));
+		}else if ("list".equals(act)) {
+			// 查询列表
+			jqProcessInfo jpi = WebUtils.GetJqProcessInfo(request);
+
+			String data = request.getParameter("data");
+			EvidenceInfo bean = gson.fromJson(data, EvidenceInfo.class);
+
+			jqOutInfo<EvidenceInfo> oinfo = es.List(bean,
+					jpi.getiDisplayStart(), jpi.getiDisplayLength());
+
+			oinfo.setsEcho(jpi.getsEcho());
+			// 输出
+			out.print(oinfo.toString());
+			out.flush();
+			out.close();
+			return;
 		}
 
 		String json = gson.toJson(oret);
