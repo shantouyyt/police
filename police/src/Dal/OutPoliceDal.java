@@ -24,10 +24,7 @@ public class OutPoliceDal {
 		String sql = "select * from OutPolice where 1=1 ";
 
 		StringBuilder sb = new StringBuilder();
-		if (!StringHelper.IsStrNull(info.getUserName())) {
-			sb.append(" and UserName like '%").append(info.getUserName())
-					.append("%' ");
-		}
+
 		if (!StringHelper.IsStrNull(info.getCreateDate())) {
 			sb.append(" and CreateDate >='").append(info.getCreateDate())
 					.append("' ");
@@ -38,6 +35,9 @@ public class OutPoliceDal {
 		}
 		if (info.getUserID() > 0) {
 			sb.append(" and UserID =").append(info.getUserID());
+		}
+		if (info.getInPoliceID() > 0) {
+			sb.append(" and InPoliceID =").append(info.getInPoliceID());
 		}
 
 		String countsql = "select count(1) from OutPolice where 1=1 ";

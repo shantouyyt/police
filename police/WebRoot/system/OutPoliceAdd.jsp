@@ -165,15 +165,23 @@
           div.remove();
         }
 	function btn_Opt() {
-		var data = {};
-		if(id>0){
-			data["act"] = "update";
-		}else{
-			data["act"] = "add";
+		var UserIDs = [];
+		$user.find('div').each(function(){
+			var id = $(this).attr("id");
+			UserIDs.push(id);
+		});
+		if(UserIDs.length==0){
+			alert("请选择警员");
+			return;
 		}
-		data["data"] = $.toJSON($("#form").serializeObject());
+	
+		var data = {};
+		data["act"] = "add";
+		data["InPoliceID"] = id;
+		data["UserID"] = UserIDs.join(",");
+		
 		$.ajax({
-			url : '${pageContext.request.contextPath}/servlet/InPoliceServlet',
+			url : '${pageContext.request.contextPath}/servlet/OutPoliceServlet',
 			data : data,
 			type : 'post',
 			cache : false,
