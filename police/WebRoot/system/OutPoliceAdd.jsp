@@ -18,58 +18,19 @@
 	<div class="pd-20">
 
 		<form action="" method="post" class="form form-horizontal" id="form">
-
+			
 			<div class="row cl">
-				<label class="form-label col-2"><span class="c-red">*</span>报警人姓名：</label>
-				<div class="formControls col-5">
-					<input maxlength="100" type="text" class="input-text" value=""
-						placeholder="" id="name" name="name">
-				</div>
-				<div class="col-4"></div>
-			</div>
-
-			<div class="row cl">
-				<label class="form-label col-2"><span class="c-red">*</span>报警人电话：</label>
-				<div class="formControls col-5">
-					<input maxlength="20" type="text" class="input-text" value=""
-						placeholder="" id="tel" name="tel">
-				</div>
-				<div class="col-4"></div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-2">性别：</label>
-				<div class="formControls col-5">
-					<select class="select" id="sex" name="sex">
-						<option value="1">男</option>
-						<option value="0">女</option>
-					</select>
-				</div>
-				<div class="col-4"></div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-2"><span class="c-red">*</span>事故地点：</label>
-				<div class="formControls col-5">
-					<input maxlength="20" type="text" class="input-text" value=""
-						placeholder="" id="sGDD" name="sGDD">
-				</div>
-				<div class="col-4"></div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-2">死亡情况：</label>
-				<div class="formControls col-5">
-					<textarea style="margin: 0px; width: 690px; height: 126px;"
-						rows="5" cols="30" id="sWQK" name="sWQK"></textarea>
-				</div>
-				<div class="col-4"></div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-2">备注：</label>
-				<div class="formControls col-5">
-					<textarea style="margin: 0px; width: 690px; height: 126px;"
-						rows="5" cols="30" id="remark" name="remark"></textarea>
-				</div>
-				<div class="col-4"></div>
-			</div>
+                <label class="form-label col-2">出警：</label>
+                <div class="formControls col-5">
+                    <a class="btn radius btn-primary size-L" href="#myModal" data-toggle="modal">添加警员</a>
+                    <!--用来存放商品item-->
+                    <div id="divProList" class="uploader-list">
+                    </div>
+                </div>
+                <div class="col-4"></div>
+            </div>
+			
+		
 			<input type="hidden" id="id" name="id" />
 			<div class="row cl">
 				<div class="col-10 col-offset-2">
@@ -83,11 +44,39 @@
 				</div>
 			</div>
 		</form>
+		
+		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <h3 id="myModalLabel">警员信息</h3>
+                <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</a>
+            </div>
+            <div class="modal-body" style="height:300px">
+                <table class="table table-border table-bordered table-hover table-bg table-sort" id="datatable">
+	                <thead>
+	                    <tr class="text-c">
+	                        <th width="10%">警员编号</th>
+	                        <th width="10%">用户名</th>
+	                        <th width="10%">操作</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                </tbody>
+	            </table>
+            </div>
+            <div class="modal-footer">
+                
+                <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+         
 
 	</div>
 </body>
 
 <%@ include file="../common/script.jsp"%>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/lib/bootstrap-modal/2.2.4/bootstrap-modalmanager.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/lib/bootstrap-modal/2.2.4/bootstrap-modal.js"></script>
 <script>
 	var id = getUrlVar("id");
 	if(id > 0){
@@ -96,30 +85,85 @@
 		$("#id").val(0);
 	}
 	
-	$(function(){
-		if(id > 0){
-			var data = {};
-			data["act"] = "get";
-			data["data"] = id;
+	var table;
+        $(function () {
+            table = $('#datatable').dataTable({
+               	"iDisplayLength": 5, //每页显示10条数据
+            	"bFilter": false,
+	            "bProcessing": true,
+	            "sAjaxSource": "${pageContext.request.contextPath}/servlet/UsersServlet",
+	            "bSort": false,
+	            "bLengthChange": false,
+	            "bServerSide": true,
+                "aoColumns": [
+                    { "mData": "no"},
+                    { "mData": "userName"},
+
+ 
+                    {
+                        "mData": "",
+                        "render": function (data, type, full, meta) {
+                            var html = "";
+        					
+                            html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'delete\',' + full.id + ',\'' + full.userName + '\');">选择</a>';
+                            return html;
+                        }
+                    },
+                ],
+				
+                "fnServerData": fnServerData
+            });
+
+
+            $('.table-sort tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+        });
+
+        function fnServerData(sSource, aoData, fnCallback) {
+
+            var data = {};
+			data["act"] = "list";
+			data["data"] = '{"createDate":"","endDate":"","userName":""}';
+			data["aoData"] = $.toJSON(aoData);
 			$.ajax({
-				url : '${pageContext.request.contextPath}/servlet/InPoliceServlet',
+				url : sSource,
 				data : data,
 				type : 'post',
 				cache : false,
 				dataType : 'json',
 				success : function(r) {
-					if (r.statusID > 0) {
-						Json2Form(JSON.parse(r.message));
-					}else{
-						alert(r.message);
-					}
+					fnCallback(r);
 				},
 				error : function() {
-					alert("操作失败");
+					//alert("操作失败");
 				}
 			});
-		}
-	});
+        }
+        var $user = $("#divProList");
+        function operation(ActionName, UserID, name) {
+        	var flag = $user.find('div[id="'+UserID+'"]');
+        	if(flag==undefined || flag.length==0){
+	        	var $li = $(
+	                     '<div id="' + UserID + '" class="file-item thumbnail">' +
+	                         name +
+	                         '<input type="button" class="input-text" value="删除" onclick="delUser('+UserID+')" />' +
+	                     '</div>'
+	                     );
+	 
+	            $li.appendTo($user);
+            }
+        }
+        function delUser(UserID){
+          var div=$user.find('div[id="'+UserID+'"]');
+          div.remove();
+        }
 	function btn_Opt() {
 		var data = {};
 		if(id>0){
