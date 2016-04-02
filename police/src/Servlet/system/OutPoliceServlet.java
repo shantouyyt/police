@@ -86,15 +86,21 @@ public class OutPoliceServlet extends HttpServlet {
 
 		String act = request.getParameter("act");
 		if ("add".equals(act)) {
-			// 增加
+		
 			String UserID = request.getParameter("UserID");
 			String InPoliceID = request.getParameter("InPoliceID");
 			
+			//删除
+			oret = os.Delete(StringHelper.Str2Int(InPoliceID));
+			
+			// 增加
+			String date = StringHelper.GetCurrentDate();
 			String[] UserIDs = UserID.split(",");
 			for (String uid : UserIDs) {
 				OutPoliceInfo info = new OutPoliceInfo();
 				info.setUserID(StringHelper.Str2Int(uid));
 				info.setInPoliceID(StringHelper.Str2Int(InPoliceID));
+				info.setCreateDate(date);
 				
 				oret = os.Insert(info);
 			}
@@ -104,6 +110,9 @@ public class OutPoliceServlet extends HttpServlet {
 			jqProcessInfo jpi = WebUtils.GetJqProcessInfo(request);
 
 			String InPoliceID = request.getParameter("InPoliceID");
+			
+//			String data = request.getParameter("data");
+//			OutPoliceInfo bean = gson.fromJson(data, OutPoliceInfo.class);
 			
 			OutPoliceInfo bean = new OutPoliceInfo();
 			bean.setInPoliceID(StringHelper.Str2Int(InPoliceID));
@@ -117,6 +126,26 @@ public class OutPoliceServlet extends HttpServlet {
 			out.flush();
 			out.close();
 			return;
+		}else if ("listDistinct".equals(act)) {
+			// 查询列表
+			jqProcessInfo jpi = WebUtils.GetJqProcessInfo(request);
+
+			String data = request.getParameter("data");
+			OutPoliceInfo bean = gson.fromJson(data, OutPoliceInfo.class);
+
+			jqOutInfo<OutPoliceInfo> oinfo = os.ListDistinct(bean,
+					jpi.getiDisplayStart(), jpi.getiDisplayLength());
+
+			oinfo.setsEcho(jpi.getsEcho());
+			// 输出
+			out.print(oinfo.toString());
+			out.flush();
+			out.close();
+			return;
+		} else if ("delete".equals(act)) {
+			// 删除
+			String data = request.getParameter("data");
+			oret = os.Delete(StringHelper.Str2Int(data));
 		}
 		String json = gson.toJson(oret);
 		out.print(json);

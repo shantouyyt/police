@@ -12,8 +12,6 @@ public class OutPoliceService {
 
 	public Result Insert(OutPoliceInfo info) {
 
-		info.setCreateDate(StringHelper.GetCurrentDate());
-
 		int Count = dal.Insert(info);
 		if (Count == 0) {
 			return Result.Fail("添加失败");
@@ -24,8 +22,13 @@ public class OutPoliceService {
 	public jqOutInfo<OutPoliceInfo> List(OutPoliceInfo info, int iDisplayStart,
 			int iDisplayLength) {
 
-		
 		return dal.List(info, iDisplayStart, iDisplayLength);
+	}
+
+	public jqOutInfo<OutPoliceInfo> ListDistinct(OutPoliceInfo info,
+			int iDisplayStart, int iDisplayLength) {
+
+		return dal.ListDistinct(info, iDisplayStart, iDisplayLength);
 	}
 
 	public Result Delete(int InPoliceID) {
