@@ -1,96 +1,97 @@
 package Model;
 
 public class HighchartsDBInfo {
+
 	public String getTrafficMode() {
 		return trafficMode;
 	}
 	public void setTrafficMode(String trafficMode) {
 		this.trafficMode = trafficMode;
 	}
-	public String getJan() {
+	public int getJan() {
 		return jan;
 	}
-	public void setJan(String jan) {
+	public void setJan(int jan) {
 		this.jan = jan;
 	}
-	public String getFeb() {
+	public int getFeb() {
 		return feb;
 	}
-	public void setFeb(String feb) {
+	public void setFeb(int feb) {
 		this.feb = feb;
 	}
-	public String getMar() {
+	public int getMar() {
 		return mar;
 	}
-	public void setMar(String mar) {
+	public void setMar(int mar) {
 		this.mar = mar;
 	}
-	public String getApr() {
+	public int getApr() {
 		return apr;
 	}
-	public void setApr(String apr) {
+	public void setApr(int apr) {
 		this.apr = apr;
 	}
-	public String getMay() {
+	public int getMay() {
 		return may;
 	}
-	public void setMay(String may) {
+	public void setMay(int may) {
 		this.may = may;
 	}
-	public String getJun() {
+	public int getJun() {
 		return jun;
 	}
-	public void setJun(String jun) {
+	public void setJun(int jun) {
 		this.jun = jun;
 	}
-	public String getJul() {
+	public int getJul() {
 		return jul;
 	}
-	public void setJul(String jul) {
+	public void setJul(int jul) {
 		this.jul = jul;
 	}
-	public String getAug() {
+	public int getAug() {
 		return aug;
 	}
-	public void setAug(String aug) {
+	public void setAug(int aug) {
 		this.aug = aug;
 	}
-	public String getSep() {
+	public int getSep() {
 		return sep;
 	}
-	public void setSep(String sep) {
+	public void setSep(int sep) {
 		this.sep = sep;
 	}
-	public String getOct() {
+	public int getOct() {
 		return oct;
 	}
-	public void setOct(String oct) {
+	public void setOct(int oct) {
 		this.oct = oct;
 	}
-	public String getNov() {
+	public int getNov() {
 		return nov;
 	}
-	public void setNov(String nov) {
+	public void setNov(int nov) {
 		this.nov = nov;
 	}
-	public String getDecb() {
+	public int getDecb() {
 		return decb;
 	}
-	public void setDecb(String decb) {
+	public void setDecb(int decb) {
 		this.decb = decb;
 	}
 	private String trafficMode;
-	private String jan;
-	private String feb;
-	private String mar;
-	private String apr;
-	private String may;
-	private String jun;
-	private String jul;
-	private String aug;
-	private String sep;
-	private String oct;
-	private String nov;
-	private String decb;
+	private int jan;
+	private int feb;
+	private int mar;
+	private int apr;
+	private int may;
+	private int jun;
+	private int jul;
+	private int aug;
+	private int sep;
+	private int oct;
+	private int nov;
+	private int decb;
 	
 }

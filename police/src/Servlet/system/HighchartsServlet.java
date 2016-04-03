@@ -2,11 +2,17 @@ package Servlet.system;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
+import Model.HighchartsInfo;
+import Service.HighchartsService;
 
 public class HighchartsServlet extends HttpServlet {
 
@@ -68,15 +74,16 @@ public class HighchartsServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the POST method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
+		
+		String json = "";
+		HighchartsService hs = new HighchartsService();
+		String act = request.getParameter("act");
+		if ("TrafficMode".equals(act)) {
+			List<HighchartsInfo> list = hs.queryListTrafficMode();
+			
+			json = new Gson().toJson(list);
+		}
+		out.print(json);
 		out.flush();
 		out.close();
 	}

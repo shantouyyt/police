@@ -18,11 +18,12 @@ public class HighchartsService {
 		for (HighchartsDBInfo info : list) {
 			HighchartsInfo bean = new HighchartsInfo();
 			bean.setName(info.getTrafficMode());
-			String data = info.getJan() + "," + info.getFeb() + ","
+			String data =  info.getJan() + "," + info.getFeb() + ","
 					+ info.getMar() + "," + info.getApr() + "," + info.getMay()
 					+ "," + info.getJun() + "," + info.getJul() + ","
 					+ info.getAug() + "," + info.getSep() + "," + info.getOct()
-					+ "," + info.getNov() + "," + info.getDecb();
+					+ "," + info.getNov() + "," + info.getDecb() ;
+			
 			bean.setData(data);
 			ret.add(bean);
 		}
