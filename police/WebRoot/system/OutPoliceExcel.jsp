@@ -10,7 +10,7 @@
 <html>
 <head>
 <%@ include file="../common/head.jsp"%>
-<title>备份-管理</title>
+<title>导出-管理</title>
 
 </head>
 
@@ -23,7 +23,7 @@
 				<div class="col-10 col-offset-2">
 					
 					
-					<a href="${pageContext.request.contextPath}/servlet/ExcelServlet">导出</a>
+					<a class="btn radius btn-primary size-L" href="${pageContext.request.contextPath}/servlet/ExcelServlet">导出</a>
 
 				</div>
 			</div>
