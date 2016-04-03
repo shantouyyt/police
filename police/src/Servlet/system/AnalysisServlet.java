@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import Model.AnalysisInfo;
 import Model.Result;
 import Service.AnalysisService;
+import Utils.StringHelper;
 import Utils.WebUtils;
 import Utils.JqTable.jqOutInfo;
 import Utils.JqTable.jqProcessInfo;
@@ -113,6 +114,10 @@ public class AnalysisServlet extends HttpServlet {
 			out.flush();
 			out.close();
 			return;
+		}else if ("delete".equals(act)) {
+			// 删除
+			String data = request.getParameter("data");
+			oret = es.Delete(StringHelper.Str2Int(data));
 		}
 		String json = gson.toJson(oret);
 		out.print(json);

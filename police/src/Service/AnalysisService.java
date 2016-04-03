@@ -26,4 +26,15 @@ public class AnalysisService {
 
 		return dal.List(info, iDisplayStart, iDisplayLength);
 	}
+	
+	public Result Delete(int id){
+		if(id==0){
+			return Result.Fail("删除失败");
+		}
+		int ret = dal.Delete(id);
+		if(ret > 0){
+			return Result.Success("删除成功");
+		}
+		return Result.Fail("删除失败");
+	}
 }

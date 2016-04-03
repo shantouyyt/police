@@ -42,4 +42,9 @@ public class AnalysisDal {
 				count, list);
 		return joi;
 	}
+	
+	public int Delete(int id) {
+		String sql = "delete from  Analysis where id=" + id;
+		return JDBCJNDI.update(sql, null, false);
+	}
 }
