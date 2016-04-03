@@ -4,6 +4,7 @@ import java.util.List;
 
 import DBManager.JDBCJNDI;
 import Model.AccidentApprovalInfo;
+import Model.AccidentInfo;
 import Model.AccidentResponseInfo;
 import Utils.StringHelper;
 import Utils.JqTable.jqOutInfo;
@@ -80,6 +81,11 @@ public class AccidentResponseDal {
 		String sql = "update AccidentResponse set Remark=? where ID=?";
 		Object[] para = new Object[] { info.getRemark(), info.getId() };
 		return JDBCJNDI.update(sql, para, false);
+	}
+	
+	public List<AccidentResponseInfo> queryList() {
+		String sql = "select * from AccidentResponse";
+		return JDBCJNDI.queryList(AccidentResponseInfo.class, sql, null);
 	}
 
 }

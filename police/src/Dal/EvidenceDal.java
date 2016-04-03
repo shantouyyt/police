@@ -3,6 +3,7 @@ package Dal;
 import java.util.List;
 
 import DBManager.JDBCJNDI;
+import Model.AccidentResponseInfo;
 import Model.DriverInfo;
 import Model.EvidenceInfo;
 import Utils.StringHelper;
@@ -72,5 +73,10 @@ public class EvidenceDal {
 		jqOutInfo<EvidenceInfo> joi = new jqOutInfo<EvidenceInfo>("", count,
 				count, list);
 		return joi;
+	}
+	
+	public List<EvidenceInfo> queryList() {
+		String sql = "select * from Evidence";
+		return JDBCJNDI.queryList(EvidenceInfo.class, sql, null);
 	}
 }

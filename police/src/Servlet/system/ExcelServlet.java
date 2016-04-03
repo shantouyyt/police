@@ -2,7 +2,6 @@ package Servlet.system;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import jxl.Workbook;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
-
 import Model.OutPoliceInfo;
 import Model.UsersInfo;
 import Service.OutPoliceService;
@@ -104,17 +102,19 @@ public class ExcelServlet extends HttpServlet {
 
 			String[] Title = { "事故编号", "时间", "警员" };
 			String[] Column = { "inPoliceID", "createDate", "userName" };
-			
-			ExportExcel.exportExcel(workbook, "出警信息", Title,Column, oinfo.aaData);
+
+			ExportExcel.exportExcel(workbook, "出警信息", Title, Column,
+					oinfo.aaData);
 		} else {
 
 			// 导出用户信息
 			UsersService us = new UsersService();
-			List<UsersInfo> list = us.queryList();
+			List<UsersInfo> ulist = us.queryList();
 			String[] Title = { "ID", "用户名", "密码", "性别", "警员编号", "类型", "时间" };
-			//ExportExcel.exportExcel(workbook, "个人信息", Title, list);
+			String[] Column = { "id", "userName", "passWord","sex","no","userType","createDate" };
+			ExportExcel.exportExcel(workbook, "个人信息", Title, Column, ulist);
 
-			//ExportExcel.exportExcel(workbook, "个人信息2", Title, list);
+			// ExportExcel.exportExcel(workbook, "个人信息2", Title, list);
 		}
 
 		/** **********将以上缓存中的内容写到EXCEL文件中******** */

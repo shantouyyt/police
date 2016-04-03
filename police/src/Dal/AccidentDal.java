@@ -3,6 +3,7 @@ package Dal;
 import java.util.List;
 
 import DBManager.JDBCJNDI;
+import Model.AccidentApprovalInfo;
 import Model.AccidentInfo;
 import Model.DriverInfo;
 import Model.InPoliceInfo;
@@ -96,5 +97,9 @@ public class AccidentDal {
 	public int Delete(int id) {
 		String sql = "delete from  Accident where id=" + id;
 		return JDBCJNDI.update(sql, null, false);
+	}
+	public List<AccidentInfo> queryList() {
+		String sql = "select * from Accident";
+		return JDBCJNDI.queryList(AccidentInfo.class, sql, null);
 	}
 }

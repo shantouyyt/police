@@ -5,6 +5,7 @@ import java.util.List;
 import DBManager.JDBCJNDI;
 import Model.DriverInfo;
 import Model.InPoliceInfo;
+import Model.UsersInfo;
 import Utils.StringHelper;
 import Utils.JqTable.jqOutInfo;
 
@@ -58,5 +59,10 @@ public class DriverDal {
 		jqOutInfo<DriverInfo> joi = new jqOutInfo<DriverInfo>("", count, count,
 				list);
 		return joi;
+	}
+	
+	public List<DriverInfo> queryList() {
+		String sql = "select * from Driver";
+		return JDBCJNDI.queryList(DriverInfo.class, sql, null);
 	}
 }

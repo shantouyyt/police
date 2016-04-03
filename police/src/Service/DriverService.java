@@ -1,9 +1,12 @@
 package Service;
 
+import java.util.List;
+
 import Dal.DriverDal;
 import Model.DriverInfo;
 import Model.InPoliceInfo;
 import Model.Result;
+import Model.UsersInfo;
 import Utils.StringHelper;
 import Utils.JqTable.jqOutInfo;
 
@@ -69,5 +72,9 @@ public class DriverService {
 		info.setName(StringHelper.StringFilter(info.getName()));
 
 		return dal.List(info, iDisplayStart, iDisplayLength);
+	}
+	
+	public List<DriverInfo> queryList(){
+		return dal.queryList();
 	}
 }
