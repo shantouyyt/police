@@ -82,6 +82,10 @@ public class HighchartsServlet extends HttpServlet {
 			List<HighchartsInfo> list = hs.queryListTrafficMode();
 			
 			json = new Gson().toJson(list);
+		}else if ("AccidentSite".equals(act)) {
+			List<HighchartsInfo> list = hs.queryListAccidentSite();
+			
+			json = new Gson().toJson(list);
 		}
 		out.print(json);
 		out.flush();
