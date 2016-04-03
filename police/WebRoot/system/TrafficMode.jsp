@@ -8,11 +8,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <%@ include file="../common/head.jsp" %>
-	<title>用户管理</title>
+	<title>交通方式</title>
   </head>
   
   <body>
-    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页  <span class="c-gray en">&gt;</span> 用户管理 
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页  <span class="c-gray en">&gt;</span> 交通方式 
 	    <a class="btn btn-success radius r mr-20" style="line-height: 1.6em; margin-top: 3px" 
 	    	href="#"  onclick="aupdate();"  title="刷新">
 	    	<i class="Hui-iconfont">&#xe68f;</i>
@@ -20,6 +20,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	</nav>
     <div class="pd-20">
 		<div id="container" style="min-width:700px;height:400px"></div>
+		
+		<div class="row cl">
+				
+				<div class="formControls col-5">
+					<textarea style="margin: 0px; width: 690px; height: 126px;"
+						rows="5" cols="30" id="bZ" name="bZ"></textarea>
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<br/>
+			<button onclick="btn_Opt();" class="btn btn-primary radius"
+						type="button">
+						<i class="Hui-iconfont">&#xe632;</i> 保存
+					</button>
+		
 	</div>
   </body>
   
