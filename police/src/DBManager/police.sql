@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 3306
+Source Server         : localhost
 Source Server Version : 50622
 Source Host           : localhost:3306
 Source Database       : police
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2016-03-31 17:37:00
+Date: 2016-04-03 15:11:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,12 +32,14 @@ CREATE TABLE `accident` (
   `UserID` int(11) DEFAULT NULL,
   `AccidentNo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of accident
 -- ----------------------------
 INSERT INTO `accident` VALUES ('2', '摩托', '汕头', '2016-03-30 09:24:32', '事故内容', '3', '张三', '18600', '1', '2', null);
+INSERT INTO `accident` VALUES ('3', '小汽车', '汕头', '2016-04-03 12:45:14', '汕头', '2', '张三', '186', '1', '2', null);
+INSERT INTO `accident` VALUES ('4', '摩托', '潮州', '2016-04-03 12:46:00', '事故内容', '2', '张三', '176', '1', '2', null);
 
 -- ----------------------------
 -- Table structure for accidentapproval
@@ -77,6 +79,22 @@ CREATE TABLE `accidentresponse` (
 -- Records of accidentresponse
 -- ----------------------------
 INSERT INTO `accidentresponse` VALUES ('1', '2', '2', '定责内容xxx', '2', '2016-03-30 09:44:32');
+
+-- ----------------------------
+-- Table structure for analysis
+-- ----------------------------
+DROP TABLE IF EXISTS `analysis`;
+CREATE TABLE `analysis` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Remark` varchar(400) DEFAULT NULL,
+  `CreateDate` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of analysis
+-- ----------------------------
+INSERT INTO `analysis` VALUES ('2', '事故地点', '2016-04-03 03:03:49');
 
 -- ----------------------------
 -- Table structure for driver
@@ -127,11 +145,12 @@ CREATE TABLE `evidence` (
   `JTFS` varchar(20) DEFAULT NULL,
   `BZ` varchar(400) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of evidence
 -- ----------------------------
+INSERT INTO `evidence` VALUES ('1', '31', '事故地点', '天气', '轻伤人数', '2016-04-02 16:50:42', '失踪人数', '直接经济损失', '事故原因1', '事故原因2', '死亡人数', '道路宽度', '重伤人数', '交通方式', '备注');
 
 -- ----------------------------
 -- Table structure for inpolice
@@ -165,6 +184,24 @@ INSERT INTO `inpolice` VALUES ('30', 'f', '1', '2016-03-20 05:38:41', 'sdfsdf', 
 INSERT INTO `inpolice` VALUES ('31', '报警人姓名', '1', '2016-03-31 03:48:40', '备注xxxx', '报警人电话', '事故地点', '死亡情况');
 
 -- ----------------------------
+-- Table structure for outpolice
+-- ----------------------------
+DROP TABLE IF EXISTS `outpolice`;
+CREATE TABLE `outpolice` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `InPoliceID` int(11) DEFAULT NULL,
+  `UserID` int(11) DEFAULT NULL,
+  `CreateDate` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of outpolice
+-- ----------------------------
+INSERT INTO `outpolice` VALUES ('5', '31', '4', '2016-04-02 08:15:40');
+INSERT INTO `outpolice` VALUES ('6', '31', '2', '2016-04-02 08:15:40');
+
+-- ----------------------------
 -- Table structure for users
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
@@ -183,7 +220,7 @@ CREATE TABLE `users` (
   `ZGZH` varchar(50) DEFAULT NULL,
   `CJNX` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
@@ -191,3 +228,4 @@ CREATE TABLE `users` (
 INSERT INTO `users` VALUES ('1', 'admin', '123123', '1', '3', '2016-03-17 18:40:28', null, null, null, null, null, null, null);
 INSERT INTO `users` VALUES ('2', 'jy001', '123123', '1', '1', '2016-03-21 09:29:28', '1000002', '小学', '2016-03-31 17:28:38', '警员', '职务', '资格证号', '10');
 INSERT INTO `users` VALUES ('3', 'ld123', '123123', '1', '2', '2016-03-22 08:58:02', '2000003', null, null, null, null, null, null);
+INSERT INTO `users` VALUES ('4', 'jy002', '123123', '1', '1', '2016-04-02 08:15:15', '1000004', null, null, null, null, null, null);
