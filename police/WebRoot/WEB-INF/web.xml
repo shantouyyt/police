@@ -102,6 +102,13 @@
     <servlet-name>OutPoliceServlet</servlet-name>
     <servlet-class>Servlet.system.OutPoliceServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>HighchartsServlet</servlet-name>
+    <servlet-class>Servlet.system.HighchartsServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -156,6 +163,10 @@
   <servlet-mapping>
     <servlet-name>OutPoliceServlet</servlet-name>
     <url-pattern>/servlet/OutPoliceServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HighchartsServlet</servlet-name>
+    <url-pattern>/servlet/HighchartsServlet</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
