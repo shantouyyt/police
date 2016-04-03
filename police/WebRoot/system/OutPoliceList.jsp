@@ -77,7 +77,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         					html += '&nbsp;&nbsp;<a data-title="出警" _href="OutPoliceAdd.jsp?id='+full.inPoliceID+'" onclick="Hui_admin_tab(this)" href="javascript:;" ">修改</a>';
                             html += '&nbsp;&nbsp;<a href="#" onclick="operation(\'delete\',' + full.inPoliceID + ',this);">删除</a>';
 
-                            
+                            html += '&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/servlet/ExcelServlet?act=export&InPoliceID='+full.inPoliceID+'" ">导出</a>';
+                           
                             return html;
                         }
                     },

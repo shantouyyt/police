@@ -94,7 +94,7 @@ public class ExportExcel {
 
 	
 
-	public final static <T> WritableWorkbook exportExcel(WritableWorkbook workbook,String SheetName, String[] Title,
+	public final static <T> WritableWorkbook exportExcel(WritableWorkbook workbook,String SheetName, String[] Title,String[] Column,
 			List<T> listContent) {
 
 		try {
@@ -133,9 +133,10 @@ public class ExportExcel {
 			Field[] fields = null;
 			int i = 1;
 			for (Object obj : listContent) {
-				fields = obj.getClass().getDeclaredFields();
+				
 				int j = 0;
-				for (Field v : fields) {
+				for(String col : Column){
+					Field v = obj.getClass().getDeclaredField(col);
 					v.setAccessible(true);
 					Object va = v.get(obj);
 					if (va == null) {
@@ -145,6 +146,19 @@ public class ExportExcel {
 					j++;
 				}
 				i++;
+				
+//				fields = obj.getClass().getDeclaredFields();
+//				int j = 0;
+//				for (Field v : fields) {
+//					v.setAccessible(true);
+//					Object va = v.get(obj);
+//					if (va == null) {
+//						va = "";
+//					}
+//					sheet.addCell(new Label(j, i, va.toString(), wcf_left));
+//					j++;
+//				}
+//				i++;
 			}
 			return workbook;
 

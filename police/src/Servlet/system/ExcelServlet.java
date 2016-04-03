@@ -14,9 +14,15 @@ import jxl.Workbook;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 
+import Model.OutPoliceInfo;
 import Model.UsersInfo;
+import Service.OutPoliceService;
 import Service.UsersService;
 import Utils.ExportExcel;
+import Utils.StringHelper;
+import Utils.WebUtils;
+import Utils.JqTable.jqOutInfo;
+import Utils.JqTable.jqProcessInfo;
 
 public class ExcelServlet extends HttpServlet {
 
@@ -52,7 +58,7 @@ public class ExcelServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		doPost(request,response);
+		doPost(request, response);
 	}
 
 	/**
@@ -83,17 +89,34 @@ public class ExcelServlet extends HttpServlet {
 		response.setContentType("application/msexcel");// 定义输出类型
 		// 定义输出流，以便打开保存对话框_______________________end
 
-		
 		WritableWorkbook workbook = Workbook.createWorkbook(os);
-		
-		//导出用户信息
-		UsersService us = new UsersService();
-		List<UsersInfo> list = us.queryList();
-		String[] Title = { "ID", "用户名", "密码", "性别", "警员编号","类型", "时间" };
-		ExportExcel.exportExcel(workbook,"个人信息",Title, list);
-		
-		ExportExcel.exportExcel(workbook,"个人信息2",Title, list);
-		
+
+		String act = request.getParameter("act");
+		if ("export".equals(act)) {
+			// 导出用户信息
+			OutPoliceService OutPoliceService = new OutPoliceService();
+			jqProcessInfo jpi = WebUtils.GetJqProcessInfo(request);
+			String InPoliceID = request.getParameter("InPoliceID");
+			OutPoliceInfo bean = new OutPoliceInfo();
+			bean.setInPoliceID(StringHelper.Str2Int(InPoliceID));
+			jqOutInfo<OutPoliceInfo> oinfo = OutPoliceService.List(bean,
+					jpi.getiDisplayStart(), jpi.getiDisplayLength());
+
+			String[] Title = { "事故编号", "时间", "警员" };
+			String[] Column = { "inPoliceID", "createDate", "userName" };
+			
+			ExportExcel.exportExcel(workbook, "出警信息", Title,Column, oinfo.aaData);
+		} else {
+
+			// 导出用户信息
+			UsersService us = new UsersService();
+			List<UsersInfo> list = us.queryList();
+			String[] Title = { "ID", "用户名", "密码", "性别", "警员编号", "类型", "时间" };
+			//ExportExcel.exportExcel(workbook, "个人信息", Title, list);
+
+			//ExportExcel.exportExcel(workbook, "个人信息2", Title, list);
+		}
+
 		/** **********将以上缓存中的内容写到EXCEL文件中******** */
 		workbook.write();
 		/** *********关闭文件************* */
@@ -103,7 +126,7 @@ public class ExcelServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		os.flush();
 		os.close();
 	}
