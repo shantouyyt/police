@@ -1,6 +1,9 @@
 package Service;
 
+import java.util.List;
+
 import Dal.AccidentResponseDal;
+import Model.AccidentApprovalInfo;
 import Model.AccidentInfo;
 import Model.AccidentResponseInfo;
 import Model.Result;
@@ -64,6 +67,10 @@ public class AccidentResponseService {
 		}
 		return Result.Fail("修改失败");
 
+	}
+	
+	public List<AccidentResponseInfo> queryList(){
+		return dal.queryList();
 	}
 
 }

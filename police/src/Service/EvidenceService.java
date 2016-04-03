@@ -1,7 +1,10 @@
 package Service;
 
+import java.util.List;
+
 import Dal.EvidenceDal;
 import Model.AccidentApprovalInfo;
+import Model.AccidentInfo;
 import Model.AccidentResponseInfo;
 import Model.EvidenceInfo;
 import Model.Result;
@@ -46,6 +49,10 @@ public class EvidenceService {
 			int iDisplayStart, int iDisplayLength) {
 
 		return dal.List(info, iDisplayStart, iDisplayLength);
+	}
+	
+	public List<EvidenceInfo> queryList(){
+		return dal.queryList();
 	}
 
 }

@@ -1,6 +1,9 @@
 package Service;
 
+import java.util.List;
+
 import Dal.InPoliceDal;
+import Model.EvidenceInfo;
 import Model.InPoliceInfo;
 import Model.Result;
 import Utils.StringHelper;
@@ -62,5 +65,9 @@ public class InPoliceService {
 			return Result.Success("删除成功");
 		}
 		return Result.Fail("删除失败");
+	}
+	
+	public List<InPoliceInfo> queryList(){
+		return dal.queryList();
 	}
 }

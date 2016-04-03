@@ -1,9 +1,12 @@
 package Service;
 
+import java.util.List;
+
 import Dal.AccidentApprovalDal;
 import Model.AccidentApprovalInfo;
 import Model.AccidentInfo;
 import Model.Result;
+import Model.UsersInfo;
 import Utils.StringHelper;
 import Utils.JqTable.jqOutInfo;
 
@@ -48,6 +51,10 @@ public class AccidentApprovalService {
 			int iDisplayLength) {
 
 		return dal.List(info, iDisplayStart, iDisplayLength);
+	}
+	
+	public List<AccidentApprovalInfo> queryList(){
+		return dal.queryList();
 	}
 
 }

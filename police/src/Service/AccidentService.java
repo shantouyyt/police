@@ -1,7 +1,10 @@
 package Service;
 
+import java.util.List;
+
 import Dal.AccidentDal;
 import Model.AccidentInfo;
+import Model.AccidentResponseInfo;
 import Model.DriverInfo;
 import Model.Result;
 import Utils.StringHelper;
@@ -79,5 +82,9 @@ public class AccidentService {
 	
 	public AccidentInfo GetInfoByID(int id) {
 		return dal.GetInfoByID(id);
+	}
+	
+	public List<AccidentInfo> queryList(){
+		return dal.queryList();
 	}
 }

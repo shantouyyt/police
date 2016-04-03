@@ -1,5 +1,7 @@
 package Service;
 
+import java.util.List;
+
 import Dal.OutPoliceDal;
 import Model.InPoliceInfo;
 import Model.OutPoliceInfo;
@@ -40,5 +42,9 @@ public class OutPoliceService {
 			return Result.Success("删除成功");
 		}
 		return Result.Fail("删除失败");
+	}
+	
+	public List<OutPoliceInfo> queryList(){
+		return dal.queryList();
 	}
 }
