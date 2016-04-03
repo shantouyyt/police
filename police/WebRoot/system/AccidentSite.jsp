@@ -10,12 +10,12 @@
 <html>
 <head>
 <%@ include file="../common/head.jsp"%>
-<title>交通方式</title>
+<title>事故地点</title>
 </head>
 
 <body>
 	<nav class="breadcrumb"> <i class="Hui-iconfont">&#xe67f;</i> 首页
-	<span class="c-gray en">&gt;</span> 交通方式 <a
+	<span class="c-gray en">&gt;</span> 事故地点 <a
 		class="btn btn-success radius r mr-20"
 		style="line-height: 1.6em; margin-top: 3px" href="#"
 		onclick="aupdate();" title="刷新"> <i class="Hui-iconfont">&#xe68f;</i>
@@ -51,7 +51,7 @@
 	$(function() {
 		var series = [];
 		var data = {};
-		data["act"] = "TrafficMode";
+		data["act"] = "AccidentSite";
 		$
 				.ajax({
 					url : '${pageContext.request.contextPath}/servlet/HighchartsServlet',
