@@ -12,8 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import jxl.Workbook;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import Model.AccidentApprovalInfo;
+import Model.AccidentInfo;
+import Model.AccidentResponseInfo;
+import Model.DriverInfo;
+import Model.EvidenceInfo;
+import Model.InPoliceInfo;
 import Model.OutPoliceInfo;
 import Model.UsersInfo;
+import Service.AccidentApprovalService;
+import Service.AccidentResponseService;
+import Service.AccidentService;
+import Service.DriverService;
+import Service.EvidenceService;
+import Service.InPoliceService;
 import Service.OutPoliceService;
 import Service.UsersService;
 import Utils.ExportExcel;
@@ -110,11 +122,46 @@ public class ExcelServlet extends HttpServlet {
 			// 导出用户信息
 			UsersService us = new UsersService();
 			List<UsersInfo> ulist = us.queryList();
-			String[] Title = { "ID", "用户名", "密码", "性别", "警员编号", "类型", "时间" };
-			String[] Column = { "id", "userName", "passWord","sex","no","userType","createDate" };
-			ExportExcel.exportExcel(workbook, "个人信息", Title, Column, ulist);
+			ExportExcel.exportExcel(workbook, "个人信息", ulist);
 
-			// ExportExcel.exportExcel(workbook, "个人信息2", Title, list);
+			// 出警信息
+			OutPoliceService OutPoliceService = new OutPoliceService();
+			List<OutPoliceInfo> oslist = OutPoliceService.queryList();
+			ExportExcel.exportExcel(workbook, "出警信息", oslist);
+
+			// 接警信息
+			InPoliceService InPoliceService = new InPoliceService();
+			List<InPoliceInfo> InPoliceInfolist = InPoliceService.queryList();
+			ExportExcel.exportExcel(workbook, "接警信息", InPoliceInfolist);
+
+			// 现场证据
+			EvidenceService EvidenceService = new EvidenceService();
+			List<EvidenceInfo> EvidenceInfolist = EvidenceService.queryList();
+			ExportExcel.exportExcel(workbook, "现场证据", EvidenceInfolist);
+
+			// 驾驶员
+			DriverService DriverService = new DriverService();
+			List<DriverInfo> DriverInfolist = DriverService.queryList();
+			ExportExcel.exportExcel(workbook, "驾驶员", DriverInfolist);
+
+			// 事故登记表
+			AccidentService AccidentService = new AccidentService();
+			List<AccidentInfo> AccidentInfolist = AccidentService.queryList();
+			ExportExcel.exportExcel(workbook, "事故登记表", AccidentInfolist);
+
+			// 事故审批表
+			AccidentApprovalService AccidentApprovalService = new AccidentApprovalService();
+			List<AccidentApprovalInfo> AccidentApprovalInfolist = AccidentApprovalService
+					.queryList();
+			ExportExcel
+					.exportExcel(workbook, "事故审批表", AccidentApprovalInfolist);
+
+			// 事故定责表
+			AccidentResponseService AccidentResponseService = new AccidentResponseService();
+			List<AccidentResponseInfo> AccidentResponseInfolist = AccidentResponseService
+					.queryList();
+			ExportExcel
+					.exportExcel(workbook, "事故定责表", AccidentResponseInfolist);
 		}
 
 		/** **********将以上缓存中的内容写到EXCEL文件中******** */
