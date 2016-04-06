@@ -62,7 +62,7 @@
 						<th width="10%">交通方式</th>
 						<th width="20%">事故地点</th>
 						<th width="15%">事故日期</th>
-						
+						<th width="20%">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -116,6 +116,18 @@
 									},
 									{
 										"mData" : "createDate"
+									},
+									{
+										"mData" : "",
+										"render" : function(data, type, full,meta) {
+											var html = "";
+											html = 	 '<a data-title="查看事故" _href="AccidentInfo.jsp?id='
+											html +=  	full.id
+											html +=  '" onclick="Hui_admin_tab(this)" href="javascript:;">查看</a>';
+
+													
+											return html;
+										}
 									}
 									
 									],
