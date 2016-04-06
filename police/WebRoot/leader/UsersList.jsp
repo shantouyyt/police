@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <th width="10%">用户名</th>
                         <th width="10%">性别</th>
                         <th width="20%">创建日期</th>
-                        <th width="20%">类型</th>
+                        <th width="20%">操作</th>
                         
                     </tr>
                 </thead>
@@ -80,13 +80,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     	}
                    	},
                     { "mData": "createDate" },
-                    { 
-                    	"mData": "userType" ,
-                    	"render": function (data, type, full, meta) {
-                    		if(data=="1")
-                    			return "警员";
-                    	}
-                   	},
+                   	{
+                        "mData": "",
+                        "render": function (data, type, full, meta) {
+                            var html = "";
+        					html = '<a data-title="查看" _href="UsersAdd.jsp?id='+full.id+'" onclick="Hui_admin_tab(this)" href="javascript:;" ">查看</a>';
+                        	return html;
+                        }
+                    },
                     
                 ],
 				
