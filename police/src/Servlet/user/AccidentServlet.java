@@ -121,9 +121,13 @@ public class AccidentServlet extends HttpServlet {
 
 			String data = request.getParameter("data");
 			AccidentInfo bean = gson.fromJson(data, AccidentInfo.class);
-			//警员
-			if (sessionInfo.getUserType() == 1) {
-				bean.setUserID(sessionInfo.getId());
+
+			String noCheck = request.getParameter("noCheck");
+			if (!"1".equals(noCheck)) {
+				// 警员
+				if (sessionInfo.getUserType() == 1) {
+					bean.setUserID(sessionInfo.getId());
+				}
 			}
 
 			jqOutInfo<AccidentInfo> oinfo = as.List(bean,
@@ -157,7 +161,7 @@ public class AccidentServlet extends HttpServlet {
 			String data = request.getParameter("data");
 			AccidentApprovalInfo bean = gson.fromJson(data,
 					AccidentApprovalInfo.class);
-			
+
 			bean.setUserID(sessionInfo.getId());
 			AccidentApprovalService aas = new AccidentApprovalService();
 			oret = aas.Insert(bean);

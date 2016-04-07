@@ -29,6 +29,8 @@
 					class="input-text" style="width: 250px" placeholder="路段" id="accidentSite"
 					name="accidentSite">
 					
+
+					
 				<button onclick="search();" type="button"
 					class="btn btn-success radius" id="Button1" name="">
 					<i class="Hui-iconfont">&#xe665;</i> 搜索
@@ -127,6 +129,7 @@
 		var data = {};
 		data["act"] = "list";
 		data["data"] = $.toJSON($("#searchform").serializeObject());
+		data["noCheck"] = "1";
 		data["aoData"] = $.toJSON(aoData);
 		$.ajax({
 			url : sSource,
