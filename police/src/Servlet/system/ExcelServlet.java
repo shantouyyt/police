@@ -122,46 +122,91 @@ public class ExcelServlet extends HttpServlet {
 			// 导出用户信息
 			UsersService us = new UsersService();
 			List<UsersInfo> ulist = us.queryList();
-			ExportExcel.exportExcel(workbook, "个人信息", ulist);
+			String[] Title = { "ID", "用户名", "密码", "性别", "警员编号", "类型", "时间" };
+			String[] Column = { "id", "userName", "passWord", "sex", "no",
+					"userType", "createDate" };
+			ExportExcel.exportExcel(workbook, "个人信息", Title, Column, ulist);
 
 			// 出警信息
 			OutPoliceService OutPoliceService = new OutPoliceService();
 			List<OutPoliceInfo> oslist = OutPoliceService.queryList();
-			ExportExcel.exportExcel(workbook, "出警信息", oslist);
+			String[] OutPoliceInfoTitle = { "ID", "报警编号", "用户", "时间" };
+			String[] OutPoliceInfoColumn = { "id", "inPoliceID", "userID",
+					"createDate" };
+			ExportExcel.exportExcel(workbook, "出警信息", OutPoliceInfoTitle,
+					OutPoliceInfoColumn, oslist);
 
 			// 接警信息
 			InPoliceService InPoliceService = new InPoliceService();
 			List<InPoliceInfo> InPoliceInfolist = InPoliceService.queryList();
-			ExportExcel.exportExcel(workbook, "接警信息", InPoliceInfolist);
+			String[] InPoliceInfoTitle = { "ID", "事故地点", "死亡情况", "时间", "报警人信息",
+					"性别", "备注", "电话" };
+			String[] InPoliceInfoColumn = { "id", "sGDD", "sWQK", "createDate",
+					"name", "sex", "remark", "tel" };
+			ExportExcel.exportExcel(workbook, "接警信息", InPoliceInfoTitle,
+					InPoliceInfoColumn, InPoliceInfolist);
 
 			// 现场证据
 			EvidenceService EvidenceService = new EvidenceService();
 			List<EvidenceInfo> EvidenceInfolist = EvidenceService.queryList();
-			ExportExcel.exportExcel(workbook, "现场证据", EvidenceInfolist);
+			String[] EvidenceInfoTitle = { "ID", "事故编号", "事故地点", "天气", "轻伤人数",
+					"事故时间", "失踪人数", "直接经济损失", "事故原因1", "事故原因2", "死亡人数", "道路宽度",
+					"重伤人数", "交通方式", "备注" };
+			String[] EvidenceInfoColumn = { "id", "accidentNO", "sGDD", "tQ",
+					"qSRS", "createDate", "sZRS", "zJJJSS", "yJ1", "yJ2",
+					"sWRS", "dLKD", "zSRS", "jTFS", "bZ" };
+			ExportExcel.exportExcel(workbook, "现场证据", EvidenceInfoTitle,
+					EvidenceInfoColumn, EvidenceInfolist);
 
 			// 驾驶员
 			DriverService DriverService = new DriverService();
 			List<DriverInfo> DriverInfolist = DriverService.queryList();
-			ExportExcel.exportExcel(workbook, "驾驶员", DriverInfolist);
+			String[] DriverInfoTitle = { "ID", "姓名", "性别", "电话", "驾驶证",
+					"驾驶证到期时间", "地址", "创建时间", "备注" };
+			String[] DriverInfoColumn = { "id", "name", "sex", "tel",
+					"license", "licenseExpire", "address", "createDate",
+					"remark" };
+			ExportExcel.exportExcel(workbook, "驾驶员", DriverInfoTitle,
+					DriverInfoColumn, DriverInfolist);
 
 			// 事故登记表
 			AccidentService AccidentService = new AccidentService();
 			List<AccidentInfo> AccidentInfolist = AccidentService.queryList();
-			ExportExcel.exportExcel(workbook, "事故登记表", AccidentInfolist);
+			String[] AccidentInfoTitle = { "ID", "事故编号", "事故地点", "天气", "轻伤人数",
+					"事故时间", "失踪人数", "直接经济损失", "事故原因1", "事故原因2", "死亡人数", "道路宽度",
+					"重伤人数", "交通方式", "备注" };
+			String[] AccidentInfoColumn = { "id", "userID", "trafficMode",
+					"accidentSite", "createDate", "content", "status", "name",
+					"tel", "sex", "sWRS", "dLKD", "zSRS", "jTFS", "bZ" };
+			ExportExcel.exportExcel(workbook, "事故登记表", AccidentInfoTitle,
+					AccidentInfoColumn, AccidentInfolist);
 
 			// 事故审批表
 			AccidentApprovalService AccidentApprovalService = new AccidentApprovalService();
 			List<AccidentApprovalInfo> AccidentApprovalInfolist = AccidentApprovalService
 					.queryList();
-			ExportExcel
-					.exportExcel(workbook, "事故审批表", AccidentApprovalInfolist);
+
+			String[] AccidentApprovalInfoTitle = { "ID", "警员ID", "事故编号",
+					"审批内容", "填写时间", "状态" };
+			String[] AccidentApprovalInfoColumn = { "id", "userID",
+					"accidentNo", "remark", "createDate", "status" };
+
+			ExportExcel.exportExcel(workbook, "事故审批表",
+					AccidentApprovalInfoTitle, AccidentApprovalInfoColumn,
+					AccidentApprovalInfolist);
 
 			// 事故定责表
 			AccidentResponseService AccidentResponseService = new AccidentResponseService();
 			List<AccidentResponseInfo> AccidentResponseInfolist = AccidentResponseService
 					.queryList();
+			
+			String[] AccidentResponseInfoTitle = { "ID", "警员ID", "事故编号",
+					"审批内容", "填写时间", "状态" };
+			String[] AccidentResponseInfoColumn = { "id", "userID",
+					"accidentNo", "remark", "createDate", "status" };
+			
 			ExportExcel
-					.exportExcel(workbook, "事故定责表", AccidentResponseInfolist);
+					.exportExcel(workbook, "事故定责表",AccidentResponseInfoTitle,AccidentResponseInfoColumn, AccidentResponseInfolist);
 		}
 
 		/** **********将以上缓存中的内容写到EXCEL文件中******** */
