@@ -172,12 +172,11 @@ public class ExcelServlet extends HttpServlet {
 			// 事故登记表
 			AccidentService AccidentService = new AccidentService();
 			List<AccidentInfo> AccidentInfolist = AccidentService.queryList();
-			String[] AccidentInfoTitle = { "ID", "事故编号", "事故地点", "天气", "轻伤人数",
-					"事故时间", "失踪人数", "直接经济损失", "事故原因1", "事故原因2", "死亡人数", "道路宽度",
-					"重伤人数", "交通方式", "备注" };
+			String[] AccidentInfoTitle = { "事故编号", "警员ID", "交通方式", "事故地点", "事故时间",
+					"事故内容", "状态", "事故人名字", "事故人电话", "事故人性别"};
 			String[] AccidentInfoColumn = { "id", "userID", "trafficMode",
 					"accidentSite", "createDate", "content", "status", "name",
-					"tel", "sex", "sWRS", "dLKD", "zSRS", "jTFS", "bZ" };
+					"tel", "sex" };
 			ExportExcel.exportExcel(workbook, "事故登记表", AccidentInfoTitle,
 					AccidentInfoColumn, AccidentInfolist);
 
